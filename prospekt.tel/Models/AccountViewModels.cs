@@ -65,6 +65,22 @@ namespace prospekt.tel.Models
     public class RegisterViewModel
     {
         [Required]
+        [Display(Name = "Логин пользователя")]
+        public string UserName { get; set; }
+
+        [Required]
+        [Display(Name = "Фамилия пользователя")]
+        public string UserFam { get; set; }
+
+        [Required]
+        [Display(Name = "Имя пользователя")]
+        public string UserIm { get; set; }
+
+        [Required]
+        [Display(Name = "Отчество пользователя")]
+        public string UserOt { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Адрес электронной почты")]
         public string Email { get; set; }

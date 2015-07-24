@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace prospekt.tel.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         public ActionResult Index()
