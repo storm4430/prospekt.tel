@@ -241,6 +241,7 @@
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="Scripts\App\int.navigation.js" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Models\MainModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -317,6 +318,7 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Account\Login - Копировать.cshtml" />
+    <Content Include="Views\Home\Dashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

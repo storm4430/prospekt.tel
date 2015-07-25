@@ -23,7 +23,8 @@ namespace prospekt.tel
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js",
                       "~/Scripts/metisMenu.js",
-                      "~/Scripts/sb-admin-2.js"));
+                      "~/Scripts/sb-admin-2.js",
+                      "~/Scripts/App/int.navigation.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",

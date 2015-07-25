@@ -88,8 +88,8 @@
                                     <a href="#">
                                         <div>
                                             <p>
-                                                <strong>Task 1</strong>
-                                                <span class="pull-right text-muted">40% Complete</span>
+                                                <strong>Договор 1</strong>
+                                                <span class="pull-right text-muted">Осталось 6 дней</span>
                                             </p>
                                             <div class="progress progress-striped active">
                                                 <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
@@ -104,8 +104,8 @@
                                     <a href="#">
                                         <div>
                                             <p>
-                                                <strong>Task 2</strong>
-                                                <span class="pull-right text-muted">20% Complete</span>
+                                                <strong>Договор 2</strong>
+                                                <span class="pull-right text-muted">Осталось 8 дней</span>
                                             </p>
                                             <div class="progress progress-striped active">
                                                 <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
@@ -120,8 +120,8 @@
                                     <a href="#">
                                         <div>
                                             <p>
-                                                <strong>Task 3</strong>
-                                                <span class="pull-right text-muted">60% Complete</span>
+                                                <strong>Договор 3</strong>
+                                                <span class="pull-right text-muted">Осталось 4 дня</span>
                                             </p>
                                             <div class="progress progress-striped active">
                                                 <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
@@ -136,8 +136,8 @@
                                     <a href="#">
                                         <div>
                                             <p>
-                                                <strong>Task 4</strong>
-                                                <span class="pull-right text-muted">80% Complete</span>
+                                                <strong>Договор 4</strong>
+                                                <span class="pull-right text-muted">Осталось 2 дня</span>
                                             </p>
                                             <div class="progress progress-striped active">
                                                 <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
@@ -222,18 +222,8 @@
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                 <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                             </a>
-                            <ul class="dropdown-menu dropdown-user">
-                                <li>
-                                    <a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                                </li>
-                            </ul>
+                            @Html.Partial("_LoginPartial")
+                            @**@
                             <!-- /.dropdown-user -->
                         </li>
                         <!-- /.dropdown -->
@@ -254,51 +244,45 @@
                                     <!-- /input-group -->
                                 </li>
                                 <li>
-                                    <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                                    <a href="#" class="actionhref" data-url="/home/dashboard"><i class="fa fa-dashboard fa-fw"></i> Рабочая панель</a>
                                 </li>
                                 <li>
-                                    <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
+                                    <a href="#" class="actionhref" data-url="/contractors/index"><i class="fa fa-male fa-fw"></i> Контрагенты</a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-list-alt fa-fw"></i> Договора<span class="fa arrow"></span></a>
                                     <ul class="nav nav-second-level">
                                         <li>
-                                            <a href="flot.html">Flot Charts</a>
+                                            <a href="flot.html">Все договора</a>
                                         </li>
                                         <li>
-                                            <a href="morris.html">Morris.js Charts</a>
+                                            <a href="morris.html">Активные</a>
+                                        </li>
+                                        <li>
+                                            <a href="flot.html">Просроченные</a>
+                                        </li>
+                                        <li>
+                                            <a href="morris.html">Отказанные</a>
                                         </li>
                                     </ul>
                                     <!-- /.nav-second-level -->
                                 </li>
                                 <li>
-                                    <a href="tables.html"><i class="fa fa-table fa-fw"></i> Tables</a>
+                                    <a href="#" class="actionhref" data-url="/home/about"><i class="fa fa-table fa-fw"></i> Склад</a>
                                 </li>
                                 <li>
-                                    <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-wrench fa-fw"></i> UI Elements<span class="fa arrow"></span></a>
+                                    <a href="#"><i class="fa fa-shopping-cart fa-fw"></i> Номенклатура<span class="fa arrow"></span></a>
                                     <ul class="nav nav-second-level">
                                         <li>
-                                            <a href="panels-wells.html">Panels and Wells</a>
+                                            <a href="panels-wells.html"> Категории</a>
                                         </li>
                                         <li>
-                                            <a href="buttons.html">Buttons</a>
-                                        </li>
-                                        <li>
-                                            <a href="notifications.html">Notifications</a>
-                                        </li>
-                                        <li>
-                                            <a href="typography.html">Typography</a>
-                                        </li>
-                                        <li>
-                                            <a href="icons.html"> Icons</a>
-                                        </li>
-                                        <li>
-                                            <a href="grid.html">Grid</a>
+                                            <a href="buttons.html"> Рабочая номенклатура</a>
                                         </li>
                                     </ul>
                                     <!-- /.nav-second-level -->
                                 </li>
-                                <li>
+                                @*<li>
                                     <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
                                     <ul class="nav nav-second-level">
                                         <li>
@@ -327,15 +311,18 @@
                                         </li>
                                     </ul>
                                     <!-- /.nav-second-level -->
-                                </li>
+                                </li>*@
                                 <li>
-                                    <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
+                                    <a href="#"><i class="fa fa-wrench fa-fw"></i> Настройки<span class="fa arrow"></span></a>
                                     <ul class="nav nav-second-level">
                                         <li>
-                                            <a href="blank.html">Blank Page</a>
+                                            <a href="blank.html">Пользователи</a>
                                         </li>
                                         <li>
-                                            <a href="login.html">Login Page</a>
+                                            <a href="login.html">Отделения</a>
+                                        </li>
+                                        <li>
+                                            <a href="login.html">Обратная связь</a>
                                         </li>
                                     </ul>
                                     <!-- /.nav-second-level -->
@@ -349,7 +336,7 @@
             </div>
         }
 
-        <div id="page-wrapper" style="min-height: 824px;">
+        <div id="page-wrapper" @*style="min-height: 768px;"*@>
             @RenderBody()
             @*<hr />
     <footer>
