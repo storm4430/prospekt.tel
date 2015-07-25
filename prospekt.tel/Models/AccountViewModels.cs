@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace prospekt.tel.Models
@@ -49,9 +50,8 @@ namespace prospekt.tel.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Адрес электронной почты")]
-        [EmailAddress]
-        public string Email { get; set; }
+        [Display(Name = "Имя пользователя")]
+        public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -67,6 +67,10 @@ namespace prospekt.tel.Models
         [Required]
         [Display(Name = "Логин пользователя")]
         public string UserName { get; set; }
+
+        [Required]
+        [Display(Name = "Отделение")]
+        public Guid OrgId { get; set; }
 
         [Required]
         [Display(Name = "Фамилия пользователя")]
