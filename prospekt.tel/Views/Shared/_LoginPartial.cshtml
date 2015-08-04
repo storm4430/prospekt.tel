@@ -24,18 +24,33 @@
 
 <ul class="dropdown-menu dropdown-user">
     <li>
-        <a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+        <a href=""><i class="fa fa-user fa-fw"></i> Профиль</a>
     </li>
     <li>
-        <a href="http:\\ya.ru"><i class="fa fa-gear fa-fw"></i> Settings</a>
+        <a href="http:\\ya.ru"><i class="fa fa-lock fa-fw"></i> Блокировка</a>
     </li>
     <li class="divider"></li>
     <li>
-        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
-        {
-            @Html.AntiForgeryToken()
-            <a href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-sign-out fa-fw"></i> Выход</a>
-        }
+        @*@Html.AntiForgeryToken()*@
+        <a id="logoutlink" href=""><i class="fa fa-sign-out fa-fw"></i> Выход</a>
     </li>
 </ul>
+
+<script>
+    window.onload = function () {
+        $("#logoutlink").click(function (e) {
+            $.ajax({
+                url: "/Account/LogOff",
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                success: function () {
+                    console.log('Вышли!')
+                    document.location.href = "/";
+                }
+            });
+            e.preventDefault();
+        });
+    }
+
+</script>
 
