@@ -1,0 +1,28 @@
+﻿<div>
+    <table class="table table-responsive">
+        <tbody>
+            <tr>
+                <td style="border-top:none">
+                    Новая категория
+                </td>
+                <td style="border-top:none">
+                    <input type="text" id="catName" style="width:100%" class="input-sm" placeholder="Пример 'Сотовые телефоны'" autofocus required/>
+                </td>
+                <td style="border-top:none; padding-left:20px">
+                    <button type="button" class="btn btn-default btn-circle" data-dismiss="modal"><span class="fa fa-undo"></span></button>
+                    <button id="saveNewCategory" type="button" class="btn btn-success btn-circle" data-dismiss="modal"><span class="fa fa-check"></span></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#saveNewCategory').click(function () {
+            var newObj = {
+                category_desc: $('#catName').val()
+            };
+            NewObject('/api/categories', newObj, 1);
+        })
+    })
+</script>

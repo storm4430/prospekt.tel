@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище popshopModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище popshopModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="sex">
           <Key>
             <PropertyRef Name="id" />
@@ -14,11 +14,18 @@
           <Property Name="created" Type="datetime" Nullable="false" />
           <Property Name="updated" Type="datetime" Nullable="false" />
         </EntityType>
+        <Function Name="usp_Ctegories_IU" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="admin">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="category_desc" Type="varchar" Mode="In" />
+          <Parameter Name="createdBy" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="usp_GetAllCategories" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="admin">
+          <Parameter Name="substr" Type="varchar" Mode="In" />
+        </Function>
         <EntityContainer Name="Хранилище popshopModelContainer">
           <EntitySet Name="sex" EntityType="Self.sex" Schema="admin" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="popshopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -33,7 +40,22 @@
         </EntityType>
         <EntityContainer Name="psEnt" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="sex" EntityType="Self.sex" />
+          <FunctionImport Name="usp_GetAllCategories" ReturnType="Collection(popshopModel.usp_GetAllCategories_Result)" >
+            <Parameter Name="substr" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_Ctegories_IU">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="category_desc" Mode="In" Type="String" />
+            <Parameter Name="createdBy" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="usp_GetAllCategories_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="category_desc" Nullable="false" MaxLength="120" />
+          <Property Type="String" Name="created" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="updated" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="createdBy" Nullable="false" MaxLength="60" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -50,6 +72,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="usp_GetAllCategories" FunctionName="Хранилище popshopModel.usp_GetAllCategories">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="popshopModel.usp_GetAllCategories_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="category_desc" ColumnName="category_desc" />
+                <ScalarProperty Name="created" ColumnName="created" />
+                <ScalarProperty Name="updated" ColumnName="updated" />
+                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_Ctegories_IU" FunctionName="Хранилище popshopModel.usp_Ctegories_IU" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

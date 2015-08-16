@@ -20,5 +20,6 @@
 input,
 select,
 textarea {
-    max-width: 280px;
+    margin-left:15px;
+    max-width: 310px;
 }

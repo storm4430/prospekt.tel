@@ -9,7 +9,8 @@ namespace prospekt.tel
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/knockout-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -24,7 +25,9 @@ namespace prospekt.tel
                       "~/Scripts/respond.js",
                       "~/Scripts/metisMenu.js",
                       "~/Scripts/sb-admin-2.js",
-                      "~/Scripts/App/int.navigation.js"));
+                      "~/Scripts/App/int.navigation.js",
+                      "~/Scripts/App/DataTable.js",
+                      "~/Scripts/App/Categories.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",

@@ -5,11 +5,15 @@
  */
 
 body {
-    background-color: #F9EBE1;
+    /*background-color: #F9EBE1;*/
 }
 
 #wrapper {
     width: 100%;
+}
+
+.ajaxpage {
+    margin-top:15px;
 }
 
 #page-wrapper {

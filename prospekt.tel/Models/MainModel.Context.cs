@@ -12,6 +12,8 @@ namespace prospekt.tel.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class psEnt : DbContext
     {
@@ -26,5 +28,31 @@ namespace prospekt.tel.Models
         }
     
         public virtual DbSet<sex> sex { get; set; }
+    
+        public virtual ObjectResult<usp_GetAllCategories_Result> usp_GetAllCategories(string substr)
+        {
+            var substrParameter = substr != null ?
+                new ObjectParameter("substr", substr) :
+                new ObjectParameter("substr", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetAllCategories_Result>("usp_GetAllCategories", substrParameter);
+        }
+    
+        public virtual int usp_Ctegories_IU(Nullable<int> id, string category_desc, string createdBy)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            var category_descParameter = category_desc != null ?
+                new ObjectParameter("category_desc", category_desc) :
+                new ObjectParameter("category_desc", typeof(string));
+    
+            var createdByParameter = createdBy != null ?
+                new ObjectParameter("createdBy", createdBy) :
+                new ObjectParameter("createdBy", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_Ctegories_IU", idParameter, category_descParameter, createdByParameter);
+        }
     }
 }
