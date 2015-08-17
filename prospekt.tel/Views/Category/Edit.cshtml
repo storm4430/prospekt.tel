@@ -1,0 +1,54 @@
+﻿<div>
+    <table class="table table-responsive table-condensed">
+        <tbody>
+            <tr>
+                <td style="border-top:none">
+                    Код категории:
+                </td>
+                <td id="code" style="border-top:none">
+                </td>
+            </tr>
+            <tr>
+                <td style="border-top:none">
+                    Наименование категории:
+                </td>
+                <td style="border-top:none">
+                    <input type="text" class="input-sm" id="desc" autofocus style="margin-left:0; width:100%"/>
+                </td>
+            </tr>
+            <tr>
+                <td style="border-top:none">
+                    Дата последнего изменения:
+                </td>
+                <td id="updated" style="border-top:none">
+                </td>
+            </tr>
+            <tr>
+                <td style="border-top:none">
+                    Автор категории:
+                </td>
+                <td id="author" style="border-top:none"></td>
+            </tr>
+        </tbody>
+    </table>
+    <button type="button" class="btn btn-default btn-circle" data-dismiss="modal"><span class="fa fa-undo"></span></button>
+    <button id="updCategory" type="button" class="btn btn-success btn-circle" data-dismiss="modal">
+        <span class="fa fa-check"></span>
+    </button>
+</div>
+<script>
+    $(document).ready(function () {
+        $.get('/api/categories/'+'@ViewBag.CategoryId', function (data) {
+            $('#code').text(data.id);
+            $('#desc').val(data.category_desc);
+            $('#updated').text(data.updated);
+            $('#author').text(data.createdBy);
+        })
+        $('#updCategory').click(function () {
+            var obj = {
+                category_desc: $('#desc').val()
+            };
+            UpdateObject('/api/categories/' + '@ViewBag.CategoryId',obj, 1);
+        })
+    })
+</script>

@@ -14,6 +14,9 @@
           <Property Name="created" Type="datetime" Nullable="false" />
           <Property Name="updated" Type="datetime" Nullable="false" />
         </EntityType>
+        <Function Name="usp_Ctegories_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="admin">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
         <Function Name="usp_Ctegories_IU" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="admin">
           <Parameter Name="id" Type="int" Mode="In" />
           <Parameter Name="category_desc" Type="varchar" Mode="In" />
@@ -21,6 +24,13 @@
         </Function>
         <Function Name="usp_GetAllCategories" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="admin">
           <Parameter Name="substr" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="usp_GetAllSubCategoriesByCategoryID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="admin">
+          <Parameter Name="catId" Type="int" Mode="In" />
+          <Parameter Name="substr" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="usp_GetCategoryById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="admin">
+          <Parameter Name="id" Type="int" Mode="In" />
         </Function>
         <EntityContainer Name="Хранилище popshopModelContainer">
           <EntitySet Name="sex" EntityType="Self.sex" Schema="admin" store:Type="Tables" />
@@ -41,12 +51,22 @@
         <EntityContainer Name="psEnt" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="sex" EntityType="Self.sex" />
           <FunctionImport Name="usp_GetAllCategories" ReturnType="Collection(popshopModel.usp_GetAllCategories_Result)" >
-            <Parameter Name="substr" Mode="In" Type="String" />
+          <Parameter Name="substr" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="usp_Ctegories_IU">
             <Parameter Name="id" Mode="In" Type="Int32" />
             <Parameter Name="category_desc" Mode="In" Type="String" />
             <Parameter Name="createdBy" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_Ctegories_Delete">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_GetCategoryById" ReturnType="Collection(popshopModel.usp_GetCategoryById_Result)">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_GetAllSubCategoriesByCategoryID" ReturnType="Collection(popshopModel.usp_GetAllSubCategoriesByCategoryID_Result)">
+            <Parameter Name="catId" Mode="In" Type="Int32" />
+            <Parameter Name="substr" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="usp_GetAllCategories_Result">
@@ -55,6 +75,20 @@
           <Property Type="String" Name="created" Nullable="true" MaxLength="20" />
           <Property Type="String" Name="updated" Nullable="true" MaxLength="20" />
           <Property Type="String" Name="createdBy" Nullable="false" MaxLength="60" />
+        </ComplexType>
+        <ComplexType Name="usp_GetCategoryById_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="category_desc" Nullable="false" MaxLength="120" />
+          <Property Type="String" Name="created" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="updated" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="createdBy" Nullable="false" MaxLength="60" />
+        </ComplexType>
+        <ComplexType Name="usp_GetAllSubCategoriesByCategoryID_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="created" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="updated" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="createdBy" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="subcategory_desc" Nullable="false" MaxLength="120" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -84,6 +118,29 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="usp_Ctegories_IU" FunctionName="Хранилище popshopModel.usp_Ctegories_IU" />
+          <FunctionImportMapping FunctionImportName="usp_Ctegories_Delete" FunctionName="Хранилище popshopModel.usp_Ctegories_Delete" />
+          <FunctionImportMapping FunctionImportName="usp_GetCategoryById" FunctionName="Хранилище popshopModel.usp_GetCategoryById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="popshopModel.usp_GetCategoryById_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="category_desc" ColumnName="category_desc" />
+                <ScalarProperty Name="created" ColumnName="created" />
+                <ScalarProperty Name="updated" ColumnName="updated" />
+                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_GetAllSubCategoriesByCategoryID" FunctionName="Хранилище popshopModel.usp_GetAllSubCategoriesByCategoryID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="popshopModel.usp_GetAllSubCategoriesByCategoryID_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="created" ColumnName="created" />
+                <ScalarProperty Name="updated" ColumnName="updated" />
+                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+                <ScalarProperty Name="subcategory_desc" ColumnName="subcategory_desc" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

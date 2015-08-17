@@ -54,5 +54,36 @@ namespace prospekt.tel.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_Ctegories_IU", idParameter, category_descParameter, createdByParameter);
         }
+    
+        public virtual int usp_Ctegories_Delete(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_Ctegories_Delete", idParameter);
+        }
+    
+        public virtual ObjectResult<usp_GetCategoryById_Result> usp_GetCategoryById(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetCategoryById_Result>("usp_GetCategoryById", idParameter);
+        }
+    
+        public virtual ObjectResult<usp_GetAllSubCategoriesByCategoryID_Result> usp_GetAllSubCategoriesByCategoryID(Nullable<int> catId, string substr)
+        {
+            var catIdParameter = catId.HasValue ?
+                new ObjectParameter("catId", catId) :
+                new ObjectParameter("catId", typeof(int));
+    
+            var substrParameter = substr != null ?
+                new ObjectParameter("substr", substr) :
+                new ObjectParameter("substr", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetAllSubCategoriesByCategoryID_Result>("usp_GetAllSubCategoriesByCategoryID", catIdParameter, substrParameter);
+        }
     }
 }

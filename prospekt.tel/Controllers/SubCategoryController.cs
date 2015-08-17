@@ -13,8 +13,8 @@ namespace prospekt.tel.Controllers
         /// <returns>SubCategory/Index.cshtml</returns>
         public ActionResult Index(int categoryId)
         {
-            ViewBag.categoruId = categoryId;
-            return View();
+            ViewBag.categoryId = categoryId;
+            return PartialView();
         }
     }
 }

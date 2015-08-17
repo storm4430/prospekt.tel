@@ -1,0 +1,17 @@
+﻿<div>
+    <h4 id="notify"></h4>
+    <p>Вы уверены?</p>
+    <button type="button" class="btn btn-default btn-circle" data-dismiss="modal"><span class="fa fa-undo"></span></button>
+    <button id="delCategory" type="button" class="btn btn-success btn-circle" data-dismiss="modal">
+        <span class="fa fa-check"></span>
+    </button></div>
+<script>
+    $(document).ready(function () {
+        $.get('/api/categories/'+'@ViewBag.CategoryId', function (data) {
+            $('#notify').html('Будет удалена следующая запись: <strong>' + data.category_desc);
+        })
+        $('#delCategory').click(function () {
+            DeleteObject('/api/categories/' + '@ViewBag.CategoryId', 1);
+        })
+    })
+</script>

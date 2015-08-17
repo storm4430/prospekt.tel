@@ -15,11 +15,11 @@ $('.actionhref').click(function () {
     var ucnavUrl = path;
     ProgressInAction('1');
     $.get(ucnavUrl, function (data) {
-        $('#page-wrapper').empty().html(data);
+        $('#mainContainer').empty().html(data);
     }).success(function () {
         ProgressInAction('0');
     }).error(function () {
-        $('#page-wrapper').empty().html(errPage);
+        $('#mainContainer').empty().html(errPage);
         ProgressInAction('0');
     })
 })

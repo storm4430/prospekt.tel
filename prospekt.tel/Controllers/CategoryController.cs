@@ -30,10 +30,21 @@ namespace prospekt.tel.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult Details(int categoryId)
+        public ActionResult Edit(int id)
         {
-            ViewBag.CategoryId = categoryId;
-            return View();
+            ViewBag.CategoryId = id;
+            return PartialView();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Delete(int id)
+        {
+            ViewBag.CategoryId = id;
+            return PartialView();
         }
     }
 }
