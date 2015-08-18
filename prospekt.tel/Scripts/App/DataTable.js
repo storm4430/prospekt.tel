@@ -8,7 +8,7 @@
     if (pageSize === null) {
         pageSize = 15;
     }
-    $('#' + container).empty().fadeOut(500).html('<div id="subContainer_' + container + '"><table class="table table-responsive table-condensed table-striped"  style="margin-bottom:1px;" id="mTable' + container+ '"><thead><tr id="tHeaders' + container+ '"></tr></thead><div></div><tbody data-bind="foreach: Rows" style="cursor:pointer" id="tMainBody' + container+ '"></tbody></table></div>').fadeIn(200);
+    $('#' + container).empty().html('<div id="subContainer_' + container + '"><table class="table table-responsive table-condensed table-striped"  style="margin-bottom:1px;" id="mTable' + container+ '"><thead><tr id="tHeaders' + container+ '"></tr></thead><div></div><tbody data-bind="foreach: Rows" style="cursor:pointer" id="tMainBody' + container+ '"></tbody></table></div>');
 
     ///Инициализация заголовков таблицы 
     var t = '';
