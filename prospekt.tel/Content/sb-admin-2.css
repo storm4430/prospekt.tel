@@ -12,6 +12,11 @@ body {
     width: 100%;
 }
 
+.center {
+    margin-right: auto;
+    margin-left: auto !important;
+}
+
 .ajaxpage {
     margin-top:15px;
 }
