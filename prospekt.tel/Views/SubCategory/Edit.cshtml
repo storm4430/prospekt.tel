@@ -1,0 +1,62 @@
+﻿<div>
+    <table class="table table-responsive table-condensed">
+        <tbody>
+            <tr>
+                <td style="border-top:none">
+                    Код подкатегории:
+                </td>
+                <td id="code" style="border-top:none"></td>
+                <td id="catId" hidden></td>
+            </tr>
+            <tr>
+                <td style="border-top:none">
+                    Наименование категории:
+                </td>
+                <td id="catdesc" style="border-top:none"></td>
+            </tr>
+            <tr>
+                <td style="border-top:none">
+                    Наименование подкатегории:
+                </td>
+                <td style="border-top:none">
+                    <input type="text" class="input-sm" id="subcatdesc" autofocus style="margin-left:0; width:100%" />
+                </td>
+            </tr>
+            <tr>
+                <td style="border-top:none">
+                    Дата последнего изменения:
+                </td>
+                <td id="updated" style="border-top:none"></td>
+            </tr>
+            <tr>
+                <td style="border-top:none">
+                    Автор категории:
+                </td>
+                <td id="author" style="border-top:none"></td>
+            </tr>
+        </tbody>
+    </table>
+    <button type="button" class="btn btn-default btn-circle" data-dismiss="modal"><span class="fa fa-undo"></span></button>
+    <button id="updCategory" type="button" class="btn btn-success btn-circle" data-dismiss="modal">
+        <span class="fa fa-check"></span>
+    </button>
+</div>
+<script>
+    $(document).ready(function () {
+        $.get('/api/subcategories/' + '@ViewBag.CatId', function (data) {
+            $('#code').text(data.id);
+            $('#catId').text(data.catId);
+            $('#catdesc').text(data.category_desc);
+            $('#subcatdesc').val(data.subcategory_desc);
+            $('#updated').text(data.updated);
+            $('#author').text(data.createdBy);
+        })
+        $('#updCategory').click(function () {
+            var obj = {
+                subcategory_desc: $('#subcatdesc').val()
+            };
+            UpdateObject('/api/subcategories/' + '@ViewBag.CatId', obj, 2, $('#catId').text());
+        })
+    })
+</script>
+

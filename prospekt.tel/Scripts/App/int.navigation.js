@@ -8,7 +8,8 @@
                         </div>\
                     </div>\
 				</div>'
-$('.actionhref').click(function () {
+$('.actionhref').click(function (e) {
+    
     var sel = this.id;
     var path = $(this).data('url');
     //$('#mPBar').show(100);
@@ -22,11 +23,11 @@ $('.actionhref').click(function () {
         $('#mainContainer').empty().html(errPage);
         ProgressInAction('0');
     })
+    e.preventDefault();
 })
 
 $('.modalCont').click(function () {
     var path = $(this).data('ajaxpath');
-    console.log(path);
     $('#ModMessages').modal({
         keyboard: false
     }, 'show');

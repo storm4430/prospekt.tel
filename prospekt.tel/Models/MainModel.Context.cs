@@ -85,5 +85,31 @@ namespace prospekt.tel.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetAllSubCategoriesByCategoryID_Result>("usp_GetAllSubCategoriesByCategoryID", catIdParameter, substrParameter);
         }
+    
+        public virtual ObjectResult<usp_GetSubCategoryById_Result> usp_GetSubCategoryById(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetSubCategoryById_Result>("usp_GetSubCategoryById", idParameter);
+        }
+    
+        public virtual int usp_SubCategories_IU(Nullable<int> id, string subcategory_desc, string createdBy)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            var subcategory_descParameter = subcategory_desc != null ?
+                new ObjectParameter("subcategory_desc", subcategory_desc) :
+                new ObjectParameter("subcategory_desc", typeof(string));
+    
+            var createdByParameter = createdBy != null ?
+                new ObjectParameter("createdBy", createdBy) :
+                new ObjectParameter("createdBy", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_SubCategories_IU", idParameter, subcategory_descParameter, createdByParameter);
+        }
     }
 }

@@ -1,5 +1,4 @@
 ﻿@* Представление список подкатегорий *@
-
 <div class="panel panel-default">
     <div class="panel-heading">
         <i class="fa fa-bar-chart-o fa-fw"></i> ПОДКАТЕГОРИИ
@@ -11,7 +10,7 @@
                 </button>
                 <ul class="dropdown-menu pull-right" role="menu">
                     <li>
-                        <a href="#" class="modalCont" data-ajaxpath="/category/insert">Новая подкатегория</a>
+                        <a href="#" class="modalCont" data-ajaxpath="/subcategory/insert/@ViewBag.categoryId">Новая подкатегория</a>
                     </li>
                     <li>
                         <a href="#">Показать архивные записи</a>
@@ -38,8 +37,9 @@
 
     </div>
     <div class="panel-footer">
-        <div id="tsfoot"></div>
+        <div id="tsfoot"><button class="btn btn-link" id="backWrap"><i class="fa fa-backward fa-fw"></i>  Вернуться</button></div>
     </div>
+    
     <!-- /.panel-body -->
 </div>
 
@@ -63,6 +63,10 @@
             if ($(this).val().length > 2 || $(this).val() == '') {
                 GetSubCategories('@ViewBag.categoryId', $(this).val());
             }
+        });
+
+        $('#backWrap').click(function () {
+            SubdirectoryToCategory();
         })
     })
 </script>

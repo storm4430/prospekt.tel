@@ -43,10 +43,9 @@ function CategoryDelete(objId) {
 
 function CategoryToSubdirectory(objId) {
     $.get('/subcategory/index/?categoryid=' + objId, function (data) {
-        $('#ajaxpage').hide(200);
-        $('#subCategory').empty().html(data).show(200);
+        $('#ajaxpage').hide();
+        $('#subCategory').empty().html(data).show();
     })
-
 }
 
 
@@ -68,5 +67,31 @@ function GetSubCategories(catid, substr) {
             }
 
             ]
-        }, '/api/subcategories/?catid=' + catid + '&substr=' + substr, 15, 'subtree')
+        }, '/api/subcategories/?catid=' + catid + '&substr=' + substr, 15, 'subtree');
+}
+function SubCategoryEdit(objId) {
+    $.get('/subcategory/edit/' + objId, function (data) {
+        $('#mt').text('РЕДАКТИРОВАНИЕ ЗАПИСИ');
+        $('#mb').empty().html(data);
+        $('#categoryMessages').modal({
+            keyboard: false,
+            backdrop: false
+        }, 'show');
+    })
+}
+
+function SubCategoryDelete(objId) {
+    $.get('/subcategory/delete/' + objId, function (data) {
+        $('#mt').text('УДАЛЕНИЕ ЗАПИСИ');
+        $('#mb').empty().html(data);
+        $('#categoryMessages').modal({
+            keyboard: false,
+            backdrop: false
+        }, 'show');
+    })
+}
+
+function SubdirectoryToCategory() {
+    $('#ajaxpage').show();
+    $('#subCategory').hide();
 }

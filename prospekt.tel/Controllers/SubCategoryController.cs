@@ -16,5 +16,17 @@ namespace prospekt.tel.Controllers
             ViewBag.categoryId = categoryId;
             return PartialView();
         }
+
+        public ActionResult Insert(int id)
+        {
+            ViewBag.CatId = id;
+            return PartialView();
+        }
+
+        public ActionResult Edit(int id)
+        {
+            ViewBag.CatId = id;
+            return PartialView();
+        }
     }
 }

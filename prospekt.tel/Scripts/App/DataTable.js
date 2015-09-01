@@ -1,5 +1,4 @@
 ﻿function GetDataTable(items, apiPath, pageSize, container) {
-    console.log(container);
     //ko.cleanNode(document.getElementById('subContainer'));
     
     var presets = items.fields[0];
@@ -52,13 +51,15 @@ function GetAssignments(dataPath) { //'/api/assignments/2036531'
     }
     self.RemoveObject = function (assign, act) {
         switch (act) {
-            case ('Category'): { CategoryDelete(assign.id) };
+            case ('Category'): { CategoryDelete(assign.id) }; break;
+            case ('subCategory'): { SubCategoryDelete(assign.id) }; break;
             default:
         }
     }
     self.EditObject = function (assign, act) {
         switch (act) {
-            case ('Category'): { CategoryEdit(assign.id) };
+            case ('Category'): { CategoryEdit(assign.id) }; break;
+            case ('subCategory'): { SubCategoryEdit(assign.id) }; break;
             default:
 
         }
@@ -90,39 +91,42 @@ function GetAssignments(dataPath) { //'/api/assignments/2036531'
     self.init();
 };
 
-function NewObject(dataURL, obj, objEntity) {
+function NewObject(dataURL, obj, objEntity,opt) {
     $.ajax(dataURL,
         {
             method: "POST",
             data: obj,
             success: function () {
                 switch (objEntity) {
-                    case (1): GetCategories('');
+                    case (1): GetCategories(''); break;
+                    case (2): GetSubCategories(opt,''); break;
                 }
             }
         });
 }
 
-function UpdateObject(dataURL, obj, objEntity) {
+function UpdateObject(dataURL, obj, objEntity, opt) {
     $.ajax(dataURL,
         {
             method: "PUT",
             data: obj,
             success: function () {
                 switch (objEntity) {
-                    case (1): GetCategories('');
+                    case (1): GetCategories(''); break;
+                    case (2): GetSubCategories(opt,''); break;
                 }
             }
         });
 }
 
-function DeleteObject(dataURL, objEntity) {
+function DeleteObject(dataURL, objEntity,opt) {
     $.ajax(dataURL,
         {
             method: "DELETE",
             success: function () {
                 switch (objEntity) {
-                    case (1): GetCategories('');
+                    case (1): GetCategories(''); break;
+                    case (2): GetSubCategories(opt,''); break;
                 }
             }
         });

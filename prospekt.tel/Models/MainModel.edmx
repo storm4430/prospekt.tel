@@ -32,6 +32,14 @@
         <Function Name="usp_GetCategoryById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="admin">
           <Parameter Name="id" Type="int" Mode="In" />
         </Function>
+        <Function Name="usp_GetSubCategoryById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="admin">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_SubCategories_IU" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="admin">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="subcategory_desc" Type="varchar" Mode="In" />
+          <Parameter Name="createdBy" Type="varchar" Mode="In" />
+        </Function>
         <EntityContainer Name="Хранилище popshopModelContainer">
           <EntitySet Name="sex" EntityType="Self.sex" Schema="admin" store:Type="Tables" />
         </EntityContainer>
@@ -68,6 +76,14 @@
             <Parameter Name="catId" Mode="In" Type="Int32" />
             <Parameter Name="substr" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="usp_GetSubCategoryById" ReturnType="Collection(popshopModel.usp_GetSubCategoryById_Result)">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_SubCategories_IU">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="subcategory_desc" Mode="In" Type="String" />
+            <Parameter Name="createdBy" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="usp_GetAllCategories_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
@@ -89,6 +105,15 @@
           <Property Type="String" Name="updated" Nullable="true" MaxLength="20" />
           <Property Type="String" Name="createdBy" Nullable="false" MaxLength="60" />
           <Property Type="String" Name="subcategory_desc" Nullable="false" MaxLength="120" />
+        </ComplexType>
+        <ComplexType Name="usp_GetSubCategoryById_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="Int32" Name="catId" Nullable="true" />
+          <Property Type="String" Name="category_desc" Nullable="true" MaxLength="120" />
+          <Property Type="String" Name="subcategory_desc" Nullable="false" MaxLength="120" />
+          <Property Type="String" Name="created" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="updated" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="createdBy" Nullable="true" MaxLength="60" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -141,6 +166,20 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_GetSubCategoryById" FunctionName="Хранилище popshopModel.usp_GetSubCategoryById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="popshopModel.usp_GetSubCategoryById_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="catId" ColumnName="catId" />
+                <ScalarProperty Name="category_desc" ColumnName="category_desc" />
+                <ScalarProperty Name="subcategory_desc" ColumnName="subcategory_desc" />
+                <ScalarProperty Name="created" ColumnName="created" />
+                <ScalarProperty Name="updated" ColumnName="updated" />
+                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_SubCategories_IU" FunctionName="Хранилище popshopModel.usp_SubCategories_IU" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
