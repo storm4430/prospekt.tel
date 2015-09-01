@@ -95,11 +95,15 @@ namespace prospekt.tel.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetSubCategoryById_Result>("usp_GetSubCategoryById", idParameter);
         }
     
-        public virtual int usp_SubCategories_IU(Nullable<int> id, string subcategory_desc, string createdBy)
+        public virtual int usp_SubCategories_IU(Nullable<int> id, Nullable<int> catId, string subcategory_desc, string createdBy)
         {
             var idParameter = id.HasValue ?
                 new ObjectParameter("id", id) :
                 new ObjectParameter("id", typeof(int));
+    
+            var catIdParameter = catId.HasValue ?
+                new ObjectParameter("catId", catId) :
+                new ObjectParameter("catId", typeof(int));
     
             var subcategory_descParameter = subcategory_desc != null ?
                 new ObjectParameter("subcategory_desc", subcategory_desc) :
@@ -109,7 +113,33 @@ namespace prospekt.tel.Models
                 new ObjectParameter("createdBy", createdBy) :
                 new ObjectParameter("createdBy", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_SubCategories_IU", idParameter, subcategory_descParameter, createdByParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_SubCategories_IU", idParameter, catIdParameter, subcategory_descParameter, createdByParameter);
+        }
+    
+        public virtual int usp_SubCategories_Delete(Nullable<int> id, string user)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            var userParameter = user != null ?
+                new ObjectParameter("user", user) :
+                new ObjectParameter("user", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_SubCategories_Delete", idParameter, userParameter);
+        }
+    
+        public virtual ObjectResult<usp_GetAllProducts_Result> usp_GetAllProducts(Nullable<int> scat, string substr)
+        {
+            var scatParameter = scat.HasValue ?
+                new ObjectParameter("scat", scat) :
+                new ObjectParameter("scat", typeof(int));
+    
+            var substrParameter = substr != null ?
+                new ObjectParameter("substr", substr) :
+                new ObjectParameter("substr", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetAllProducts_Result>("usp_GetAllProducts", scatParameter, substrParameter);
         }
     }
 }

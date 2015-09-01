@@ -1,1 +1,32 @@
-﻿вставка
+﻿<div>
+    <table class="table table-responsive">
+        <tbody>
+            <tr>
+                <td style="border-top:none">
+                    Новая подкатегория
+                </td>
+                <td hidden id="catId">@ViewBag.CatId</td>
+                <td style="border-top:none">
+                    <input type="text" id="subCatName" style="width:100%" class="input-sm" placeholder="Пример 'SONY'" autofocus required />
+                </td>
+                <td style="border-top:none; padding-left:20px">
+                    <button type="button" class="btn btn-default btn-circle" data-dismiss="modal"><span class="fa fa-undo"></span></button>
+                    <button id="saveNewSubCategory" type="button" class="btn btn-success btn-circle" data-dismiss="modal"><span class="fa fa-check"></span></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#saveNewSubCategory').click(function () {
+            console.log('id категории - ' + $('#catId').text());
+            var newObj = {
+                catId: $('#catId').text(),
+                subcategory_desc: $('#subCatName').val()
+            };
+            NewObject('/api/subcategories', newObj, 2, $('#catId').text());
+        })
+    })
+</script>
+

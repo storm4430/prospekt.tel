@@ -25,6 +25,10 @@
         <Function Name="usp_GetAllCategories" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="admin">
           <Parameter Name="substr" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="usp_GetAllProducts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="admin">
+          <Parameter Name="scat" Type="int" Mode="In" />
+          <Parameter Name="substr" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="usp_GetAllSubCategoriesByCategoryID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="admin">
           <Parameter Name="catId" Type="int" Mode="In" />
           <Parameter Name="substr" Type="varchar" Mode="In" />
@@ -35,8 +39,13 @@
         <Function Name="usp_GetSubCategoryById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="admin">
           <Parameter Name="id" Type="int" Mode="In" />
         </Function>
+        <Function Name="usp_SubCategories_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="admin">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="user" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="usp_SubCategories_IU" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="admin">
           <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="catId" Type="int" Mode="In" />
           <Parameter Name="subcategory_desc" Type="varchar" Mode="In" />
           <Parameter Name="createdBy" Type="varchar" Mode="In" />
         </Function>
@@ -81,8 +90,17 @@
           </FunctionImport>
           <FunctionImport Name="usp_SubCategories_IU">
             <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="catId" Mode="In" Type="Int32" />
             <Parameter Name="subcategory_desc" Mode="In" Type="String" />
             <Parameter Name="createdBy" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_SubCategories_Delete">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="user" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_GetAllProducts" ReturnType="Collection(popshopModel.usp_GetAllProducts_Result)">
+          <Parameter Name="scat" Mode="In" Type="Int32" />
+            <Parameter Name="substr" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="usp_GetAllCategories_Result">
@@ -113,7 +131,16 @@
           <Property Type="String" Name="subcategory_desc" Nullable="false" MaxLength="120" />
           <Property Type="String" Name="created" Nullable="true" MaxLength="20" />
           <Property Type="String" Name="updated" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="createdBy" Nullable="true" MaxLength="60" />
+          <Property Type="String" Name="createdBy" Nullable="false" MaxLength="60" />
+        </ComplexType>
+        <ComplexType Name="usp_GetAllProducts_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="product_name" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="category_desc" Nullable="true" MaxLength="120" />
+          <Property Type="String" Name="subcategory_desc" Nullable="true" MaxLength="120" />
+          <Property Type="String" Name="created" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="updated" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="createdBy" Nullable="false" MaxLength="60" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -180,6 +207,20 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="usp_SubCategories_IU" FunctionName="Хранилище popshopModel.usp_SubCategories_IU" />
+          <FunctionImportMapping FunctionImportName="usp_SubCategories_Delete" FunctionName="Хранилище popshopModel.usp_SubCategories_Delete" />
+          <FunctionImportMapping FunctionImportName="usp_GetAllProducts" FunctionName="Хранилище popshopModel.usp_GetAllProducts">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="popshopModel.usp_GetAllProducts_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="product_name" ColumnName="product_name" />
+                <ScalarProperty Name="category_desc" ColumnName="category_desc" />
+                <ScalarProperty Name="subcategory_desc" ColumnName="subcategory_desc" />
+                <ScalarProperty Name="created" ColumnName="created" />
+                <ScalarProperty Name="updated" ColumnName="updated" />
+                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

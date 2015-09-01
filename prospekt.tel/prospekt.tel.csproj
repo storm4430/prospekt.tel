@@ -182,11 +182,13 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Common\DataHelper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Api\ProductsController.cs" />
     <Compile Include="Controllers\Api\SubCategoriesController.cs" />
     <Compile Include="Controllers\Api\CategoriesController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\SubCategoryController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -213,6 +215,9 @@
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\usp_GetAllCategories_Result.cs">
+      <DependentUpon>MainModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\usp_GetAllProducts_Result.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\usp_GetAllSubCategoriesByCategoryID_Result.cs">
@@ -350,6 +355,9 @@
     <Content Include="Views\SubCategory\Index.cshtml" />
     <Content Include="Views\SubCategory\Edit.cshtml" />
     <Content Include="Views\SubCategory\Insert.cshtml" />
+    <Content Include="Views\SubCategory\Delete.cshtml" />
+    <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\Product\Insert.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

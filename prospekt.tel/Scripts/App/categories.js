@@ -48,7 +48,7 @@ function CategoryToSubdirectory(objId) {
     })
 }
 
-
+//============================================================
 //-----------------------------Подкатегории-------------------
 function GetSubCategories(catid, substr) {
     GetDataTable(
@@ -92,6 +92,65 @@ function SubCategoryDelete(objId) {
 }
 
 function SubdirectoryToCategory() {
-    $('#ajaxpage').show();
     $('#subCategory').hide();
+    $('#ajaxpage').show();
 }
+
+
+//-----------------------------Номенклатура-------------------
+function Getproducts(scatId, substr) {
+    GetDataTable(
+        {
+            fields: [{
+                "id": "Код",
+                "product_name": "Наименование",
+                "category_desc": "Категория",
+                "subcategory_desc": "Подкатегория",
+                "created": "Создана",
+                "updated": "Обновлена",
+                "createdBy": "Автор"
+            }],
+            actions: [{
+                "Details": "'Product'",
+                "Delete": "'Product'",
+                "Update": "'Product'"
+            }
+
+            ]
+        }, '/api/products/?id=' + scatId + '&substr=' + substr, 15, 'producttree')
+}
+
+function ProductEdit(objId) {
+    $.get('/Product/edit/' + objId, function (data) {
+        $('#mt').text('РЕДАКТИРОВАНИЕ ЗАПИСИ');
+        $('#mb').empty().html(data);
+        $('#categoryMessages').modal({
+            keyboard: false,
+            backdrop: false
+        }, 'show');
+    })
+}
+
+function ProductDelete(objId) {
+    $.get('/Product/delete/' + objId, function (data) {
+        $('#mt').text('УДАЛЕНИЕ ЗАПИСИ');
+        $('#mb').empty().html(data);
+        $('#categoryMessages').modal({
+            keyboard: false,
+            backdrop: false
+        }, 'show');
+    })
+}
+
+function SubdirectoryToProduct(objId) {
+    $.get('/Product/index/' + objId, function (data) {
+        $('#subCategory').hide();
+        $('#product').empty().html(data).show();
+    })
+};
+
+function ProductToSubCategory() {
+    $('#product').hide();
+    $('#subCategory').show();
+}
+//============================================================

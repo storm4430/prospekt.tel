@@ -42,6 +42,7 @@ namespace prospekt.tel.Controllers.Api
         }
 
         // POST: api/Categories
+        [HttpPost]
         public IHttpActionResult Post(usp_GetAllCategories_Result objData)
         {
             try

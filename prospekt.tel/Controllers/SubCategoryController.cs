@@ -28,5 +28,11 @@ namespace prospekt.tel.Controllers
             ViewBag.CatId = id;
             return PartialView();
         }
+
+        public ActionResult Delete(int id)
+        {
+            ViewBag.subCatId = id;
+            return PartialView();
+        }
     }
 }

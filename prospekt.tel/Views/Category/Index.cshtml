@@ -1,18 +1,6 @@
 ﻿@* Представление список категорий *@
 
-<div class="modal fade" id="categoryMessages" style="margin-top: 8%;">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="mt"></h4>
-            </div>
-            <div class="modal-body" id="mb">
-                <p>One fine body&hellip;</p>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+
 <div class="row">
     <div class="ajaxpage" id="ajaxpage">
         <div class="panel panel-default">
@@ -57,19 +45,22 @@
                 <div id="tree" style="overflow-y:scroll; height:350px"></div>
 
             </div>
-            <div class="panel-footer">
-                <div id="tfoot"></div>
+            <div class="panel-footer" style="padding-bottom: 25px;">
+                <div>
+                    <div id="tfoot" class="pull-right"></div>
+                </div>
             </div>
             <!-- /.panel-body -->
         </div>
-        
+
     </div>
     <div class="ajaxpage" id="subCategory"></div>
+    <div class="ajaxpage" id="product"></div>
 </div>
 <script>
     $(document).ready(function () {
         GetCategories('');
-        $('.modalCont').off().click(function () {
+        $('.modalCont').off().click(function (e) {
             var path = $(this).data('ajaxpath');
             var title = $(this).text();
             $.get(path, function (data) {
@@ -79,7 +70,8 @@
                     keyboard: false,
                     backdrop: false
                 }, 'show');
-            })
+            });
+            e.preventDefault();
         })
 
         $('#catSearch').keyup(function () {

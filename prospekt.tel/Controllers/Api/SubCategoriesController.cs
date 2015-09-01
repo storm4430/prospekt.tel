@@ -42,11 +42,12 @@ namespace prospekt.tel.Controllers.Api
         }
 
         // POST: api/Categories
-        public IHttpActionResult Post(usp_GetAllCategories_Result objData)
+        [HttpPost]
+        public IHttpActionResult Post(usp_GetSubCategoryById_Result objData)
         {
             try
             {
-                var result = db.usp_Ctegories_IU(null, objData.category_desc, DataHelper.GetUserRealName(HttpContext.Current.User.Identity.Name));
+                var result = db.usp_SubCategories_IU(null, objData.catId, objData.subcategory_desc, DataHelper.GetUserRealName(HttpContext.Current.User.Identity.Name));
                 return  Ok();
             }
             catch (Exception ex)
@@ -57,11 +58,11 @@ namespace prospekt.tel.Controllers.Api
 
         // PUT: api/Categories/5
         [HttpPut]
-        public IHttpActionResult Put(int id, usp_GetAllSubCategoriesByCategoryID_Result objData)
+        public IHttpActionResult Put(int id, usp_GetSubCategoryById_Result objData)
         {
             try
             {
-                var result = db.usp_SubCategories_IU(id, objData.subcategory_desc, DataHelper.GetUserRealName(HttpContext.Current.User.Identity.Name));
+                var result = db.usp_SubCategories_IU(id, objData.catId, objData.subcategory_desc, DataHelper.GetUserRealName(HttpContext.Current.User.Identity.Name));
                 return Ok();
             }
             catch (Exception ex)
@@ -75,7 +76,7 @@ namespace prospekt.tel.Controllers.Api
         {
             try
             {
-                var result = db.usp_Ctegories_Delete(id);
+                var result = db.usp_SubCategories_Delete(id, DataHelper.GetUserRealName(User.Identity.Name));
                 return Ok();
             }
             catch (Exception ex)

@@ -53,6 +53,7 @@
         })
         $('#updCategory').click(function () {
             var obj = {
+                catId: $('#catId').text(),
                 subcategory_desc: $('#subcatdesc').val()
             };
             UpdateObject('/api/subcategories/' + '@ViewBag.CatId', obj, 2, $('#catId').text());

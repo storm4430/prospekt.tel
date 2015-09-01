@@ -45,7 +45,8 @@ function GetAssignments(dataPath) { //'/api/assignments/2036531'
     
     self.AssignDetails = function (assign, act) {
         switch (act) {
-            case ('Category'): { CategoryToSubdirectory(assign.id) };
+            case ('Category'): { CategoryToSubdirectory(assign.id) }; break;
+            case ('subCategory'): { SubdirectoryToProduct(assign.id) }; break;
             default:
         }
     }
