@@ -20,5 +20,7 @@ namespace prospekt.tel.Models
         public string created { get; set; }
         public string updated { get; set; }
         public string createdBy { get; set; }
+        public Nullable<int> catId { get; set; }
+        public Nullable<int> subcatId { get; set; }
     }
 }

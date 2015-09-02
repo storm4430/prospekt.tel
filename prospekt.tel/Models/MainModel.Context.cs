@@ -141,5 +141,30 @@ namespace prospekt.tel.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetAllProducts_Result>("usp_GetAllProducts", scatParameter, substrParameter);
         }
+    
+        public virtual int usp_Products_IU(Nullable<int> id, Nullable<int> catId, Nullable<int> subCatId, string productName, string createdBy)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            var catIdParameter = catId.HasValue ?
+                new ObjectParameter("catId", catId) :
+                new ObjectParameter("catId", typeof(int));
+    
+            var subCatIdParameter = subCatId.HasValue ?
+                new ObjectParameter("subCatId", subCatId) :
+                new ObjectParameter("subCatId", typeof(int));
+    
+            var productNameParameter = productName != null ?
+                new ObjectParameter("productName", productName) :
+                new ObjectParameter("productName", typeof(string));
+    
+            var createdByParameter = createdBy != null ?
+                new ObjectParameter("createdBy", createdBy) :
+                new ObjectParameter("createdBy", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_Products_IU", idParameter, catIdParameter, subCatIdParameter, productNameParameter, createdByParameter);
+        }
     }
 }

@@ -45,8 +45,8 @@ function GetAssignments(dataPath) { //'/api/assignments/2036531'
     
     self.AssignDetails = function (assign, act) {
         switch (act) {
-            case ('Category'): { CategoryToSubdirectory(assign.id) }; break;
-            case ('subCategory'): { SubdirectoryToProduct(assign.id) }; break;
+            case ('Category'): { __catName = assign.category_desc; CategoryToSubdirectory(assign.id) }; break;
+            case ('subCategory'): { __subCatName = assign.subcategory_desc; SubdirectoryToProduct(assign.id) }; break;
             default:
         }
     }
@@ -100,7 +100,8 @@ function NewObject(dataURL, obj, objEntity,opt) {
             success: function () {
                 switch (objEntity) {
                     case (1): GetCategories(''); break;
-                    case (2): GetSubCategories(opt,''); break;
+                    case (2): GetSubCategories(opt, ''); break;
+                    case (3): Getproducts(opt, ''); break;
                 }
             }
         });

@@ -1,4 +1,8 @@
-﻿//-----------------------------Категории-------------------
+﻿var __catId = '';
+var __subCatId = '';
+var __catName = '';
+var __subCatName = '';
+//-----------------------------Категории-------------------
 function GetCategories(substr) {
     GetDataTable(
         {
@@ -42,6 +46,8 @@ function CategoryDelete(objId) {
 }
 
 function CategoryToSubdirectory(objId) {
+    __catId = objId;
+    console.log(__catId)
     $.get('/subcategory/index/?categoryid=' + objId, function (data) {
         $('#ajaxpage').hide();
         $('#subCategory').empty().html(data).show();
@@ -56,6 +62,7 @@ function GetSubCategories(catid, substr) {
             fields: [{
                 "id": "Код",
                 "subcategory_desc": "Наименование",
+                "category_desc": "Категория",
                 "created": "Создана",
                 "updated": "Обновлена",
                 "createdBy": "Автор"
@@ -143,6 +150,7 @@ function ProductDelete(objId) {
 }
 
 function SubdirectoryToProduct(objId) {
+    __subCatId = objId;
     $.get('/Product/index/' + objId, function (data) {
         $('#subCategory').hide();
         $('#product').empty().html(data).show();

@@ -9,7 +9,10 @@
                     </div>\
 				</div>'
 $('.actionhref').click(function (e) {
-    
+    var __catId = '';
+    var __subCatId = '';
+    var __catName = '';
+    var __subCatName = '';
     var sel = this.id;
     var path = $(this).data('url');
     //$('#mPBar').show(100);

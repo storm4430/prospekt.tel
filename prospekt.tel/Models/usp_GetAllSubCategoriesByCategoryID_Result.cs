@@ -18,5 +18,6 @@ namespace prospekt.tel.Models
         public string updated { get; set; }
         public string createdBy { get; set; }
         public string subcategory_desc { get; set; }
+        public string category_desc { get; set; }
     }
 }
