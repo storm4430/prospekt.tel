@@ -54,6 +54,7 @@ function GetAssignments(dataPath) { //'/api/assignments/2036531'
         switch (act) {
             case ('Category'): { CategoryDelete(assign.id) }; break;
             case ('subCategory'): { SubCategoryDelete(assign.id) }; break;
+            case ('Product'): { ProductDelete(assign.id) }; break;
             default:
         }
     }
@@ -61,6 +62,7 @@ function GetAssignments(dataPath) { //'/api/assignments/2036531'
         switch (act) {
             case ('Category'): { CategoryEdit(assign.id) }; break;
             case ('subCategory'): { SubCategoryEdit(assign.id) }; break;
+            case ('Product'): { ProductEdit(assign.id) }; break;
             default:
 
         }
@@ -92,16 +94,20 @@ function GetAssignments(dataPath) { //'/api/assignments/2036531'
     self.init();
 };
 
-function NewObject(dataURL, obj, objEntity,opt) {
+function NewObject(dataURL, obj, objEntity, opt) {
+    console.log(obj)
     $.ajax(dataURL,
         {
             method: "POST",
             data: obj,
+            processData: false,
+            contentType: false,
             success: function () {
                 switch (objEntity) {
                     case (1): GetCategories(''); break;
                     case (2): GetSubCategories(opt, ''); break;
                     case (3): Getproducts(opt, ''); break;
+                    case (4): break;
                 }
             }
         });
@@ -115,7 +121,8 @@ function UpdateObject(dataURL, obj, objEntity, opt) {
             success: function () {
                 switch (objEntity) {
                     case (1): GetCategories(''); break;
-                    case (2): GetSubCategories(opt,''); break;
+                    case (2): GetSubCategories(opt, ''); break;
+                    case (3): Getproducts(opt, ''); break;
                 }
             }
         });
@@ -128,7 +135,8 @@ function DeleteObject(dataURL, objEntity,opt) {
             success: function () {
                 switch (objEntity) {
                     case (1): GetCategories(''); break;
-                    case (2): GetSubCategories(opt,''); break;
+                    case (2): GetSubCategories(opt, ''); break;
+                    case (3): Getproducts(opt, ''); break;
                 }
             }
         });

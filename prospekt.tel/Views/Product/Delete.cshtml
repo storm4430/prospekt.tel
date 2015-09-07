@@ -1,0 +1,23 @@
+﻿<div>
+    <h4 id="notify"></h4>
+    <p>Вы уверены?</p>
+    <input id="subcatId" hidden />
+    <input id="productId" hidden />
+    <button type="button" class="btn btn-default btn-circle" data-dismiss="modal"><span class="fa fa-undo"></span></button>
+    <button id="delProduct" type="button" class="btn btn-success btn-circle" data-dismiss="modal">
+        <span class="fa fa-check"></span>
+    </button>
+</div>
+<script>
+    $(document).ready(function () {
+        $.get('/api/products/' + '@ViewBag.ProductId', function (data) {
+            $('#subcatId').val(data.product_subcategory);
+            $('#productId').val(data.id);
+            $('#notify').html('Будет удалена следующая запись: <strong>' + data.product_name);
+        })
+        $('#delProduct').click(function () {
+            DeleteObject('/api/products/' + '@ViewBag.ProductId', 3, $('#subcatId').val());
+        })
+    })
+</script>
+

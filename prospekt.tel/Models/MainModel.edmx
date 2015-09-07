@@ -36,8 +36,35 @@
         <Function Name="usp_GetCategoryById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="admin">
           <Parameter Name="id" Type="int" Mode="In" />
         </Function>
+        <Function Name="usp_GetPerson" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="admin">
+          <Parameter Name="fam" Type="varchar" Mode="In" />
+          <Parameter Name="im" Type="varchar" Mode="In" />
+          <Parameter Name="ot" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="usp_GetPersonFIOLetters" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="admin" />
+        <Function Name="usp_GetProductById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="admin">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
         <Function Name="usp_GetSubCategoryById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="admin">
           <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_Persons_IU" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="admin">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="fam" Type="varchar" Mode="In" />
+          <Parameter Name="im" Type="varchar" Mode="In" />
+          <Parameter Name="ot" Type="varchar" Mode="In" />
+          <Parameter Name="sex" Type="int" Mode="In" />
+          <Parameter Name="birthday" Type="datetime" Mode="In" />
+          <Parameter Name="person_comment" Type="varchar" Mode="In" />
+          <Parameter Name="person_photo" Type="varchar" Mode="In" />
+          <Parameter Name="person_passport" Type="varchar" Mode="In" />
+          <Parameter Name="passport_serie" Type="varchar" Mode="In" />
+          <Parameter Name="passport_num" Type="varchar" Mode="In" />
+          <Parameter Name="cellPhone" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="usp_Products_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="admin">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="user" Type="varchar" Mode="In" />
         </Function>
         <Function Name="usp_Products_IU" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="admin">
           <Parameter Name="id" Type="int" Mode="In" />
@@ -116,6 +143,33 @@
             <Parameter Name="productName" Mode="In" Type="String" />
             <Parameter Name="createdBy" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="usp_GetProductById" ReturnType="Collection(popshopModel.usp_GetProductById_Result)">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_Products_Delete">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="user" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_GetPersonFIOLetters" ReturnType="Collection(String)" />
+          <FunctionImport Name="usp_GetPerson" ReturnType="Collection(popshopModel.usp_GetPerson_Result)">
+            <Parameter Name="fam" Mode="In" Type="String" />
+            <Parameter Name="im" Mode="In" Type="String" />
+            <Parameter Name="ot" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_Persons_IU">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="fam" Mode="In" Type="String" />
+            <Parameter Name="im" Mode="In" Type="String" />
+            <Parameter Name="ot" Mode="In" Type="String" />
+            <Parameter Name="sex" Mode="In" Type="Int32" />
+            <Parameter Name="birthday" Mode="In" Type="DateTime" />
+            <Parameter Name="person_comment" Mode="In" Type="String" />
+            <Parameter Name="person_photo" Mode="In" Type="String" />
+            <Parameter Name="person_passport" Mode="In" Type="String" />
+            <Parameter Name="passport_serie" Mode="In" Type="String" />
+            <Parameter Name="passport_num" Mode="In" Type="String" />
+            <Parameter Name="cellPhone" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="usp_GetAllCategories_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
@@ -158,6 +212,33 @@
           <Property Type="String" Name="createdBy" Nullable="false" MaxLength="60" />
           <Property Type="Int32" Name="catId" Nullable="true" />
           <Property Type="Int32" Name="subcatId" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="usp_GetProductById_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="product_name" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="created" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="updated" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="createdBy" Nullable="false" MaxLength="60" />
+          <Property Type="Int32" Name="product_subcategory" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="usp_GetPerson_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="fam" Nullable="false" MaxLength="40" />
+          <Property Type="String" Name="im" Nullable="false" MaxLength="40" />
+          <Property Type="String" Name="ot" Nullable="true" MaxLength="40" />
+          <Property Type="Int32" Name="sex" Nullable="false" />
+          <Property Type="DateTime" Name="birthday" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="created" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="updated" Nullable="false" Precision="23" />
+          <Property Type="String" Name="person_comment" Nullable="false" MaxLength="1024" />
+          <Property Type="Int32" Name="person_photo" Nullable="false" />
+          <Property Type="Int32" Name="person_passport" Nullable="false" />
+          <Property Type="String" Name="passport_serie" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="passport_num" Nullable="false" MaxLength="6" />
+          <Property Type="Boolean" Name="sysStatus" Nullable="false" />
+          <Property Type="String" Name="cellPhone" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="pers_photo" Nullable="false" MaxLength="512" />
+          <Property Type="String" Name="pass_scan" Nullable="false" MaxLength="512" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -242,6 +323,44 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="usp_Products_IU" FunctionName="Хранилище popshopModel.usp_Products_IU" />
+          <FunctionImportMapping FunctionImportName="usp_GetProductById" FunctionName="Хранилище popshopModel.usp_GetProductById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="popshopModel.usp_GetProductById_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="product_name" ColumnName="product_name" />
+                <ScalarProperty Name="created" ColumnName="created" />
+                <ScalarProperty Name="updated" ColumnName="updated" />
+                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+                <ScalarProperty Name="product_subcategory" ColumnName="product_subcategory" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_Products_Delete" FunctionName="Хранилище popshopModel.usp_Products_Delete" />
+          <FunctionImportMapping FunctionImportName="usp_GetPersonFIOLetters" FunctionName="Хранилище popshopModel.usp_GetPersonFIOLetters" />
+          <FunctionImportMapping FunctionImportName="usp_GetPerson" FunctionName="Хранилище popshopModel.usp_GetPerson">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="popshopModel.usp_GetPerson_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="fam" ColumnName="fam" />
+                <ScalarProperty Name="im" ColumnName="im" />
+                <ScalarProperty Name="ot" ColumnName="ot" />
+                <ScalarProperty Name="sex" ColumnName="sex" />
+                <ScalarProperty Name="birthday" ColumnName="birthday" />
+                <ScalarProperty Name="created" ColumnName="created" />
+                <ScalarProperty Name="updated" ColumnName="updated" />
+                <ScalarProperty Name="person_comment" ColumnName="person_comment" />
+                <ScalarProperty Name="person_photo" ColumnName="person_photo" />
+                <ScalarProperty Name="person_passport" ColumnName="person_passport" />
+                <ScalarProperty Name="passport_serie" ColumnName="passport_serie" />
+                <ScalarProperty Name="passport_num" ColumnName="passport_num" />
+                <ScalarProperty Name="sysStatus" ColumnName="sysStatus" />
+                <ScalarProperty Name="cellPhone" ColumnName="cellPhone" />
+                <ScalarProperty Name="pers_photo" ColumnName="pers_photo" />
+                <ScalarProperty Name="pass_scan" ColumnName="pass_scan" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_Persons_IU" FunctionName="Хранилище popshopModel.usp_Persons_IU" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

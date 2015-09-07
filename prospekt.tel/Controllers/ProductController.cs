@@ -37,7 +37,7 @@ namespace prospekt.tel.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            ViewBag.CategoryId = id;
+            ViewBag.ProductId = id;
             return PartialView();
         }
 
@@ -48,7 +48,7 @@ namespace prospekt.tel.Controllers
         [HttpGet]
         public ActionResult Delete(int id)
         {
-            ViewBag.CategoryId = id;
+            ViewBag.ProductId = id;
             return PartialView();
         }
     }

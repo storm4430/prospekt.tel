@@ -162,3 +162,73 @@ function ProductToSubCategory() {
     $('#subCategory').show();
 }
 //============================================================
+
+//-----------------------------Контрагент-------------------
+function GetPersons(scatId, substr) {
+    GetDataTable(
+        {
+            fields: [{
+                "id": "Код",
+                "product_name": "Наименование",
+                "category_desc": "Категория",
+                "subcategory_desc": "Подкатегория",
+                "created": "Создана",
+                "updated": "Обновлена",
+                "createdBy": "Автор"
+            }],
+            actions: [{
+                "Details": "'Product'",
+                "Delete": "'Product'",
+                "Update": "'Product'"
+            }
+
+            ]
+        }, '/api/products/?id=' + scatId + '&substr=' + substr, 15, 'producttree')
+}
+
+function PersonEdit(objId) {
+    $.get('/Product/edit/' + objId, function (data) {
+        $('#mt').text('РЕДАКТИРОВАНИЕ ЗАПИСИ');
+        $('#mb').empty().html(data);
+        $('#categoryMessages').modal({
+            keyboard: false,
+            backdrop: false
+        }, 'show');
+    })
+}
+
+function PersonCreate() {
+    $.get('/person/create/', function (data) {
+        $('#mt').text('СОЗДАНИЕ НОВОГО КОНТРАГЕНТА');
+        $('#mb').empty().html(data);
+        $('#categoryMessages').modal({
+            keyboard: false,
+            backdrop: false
+        }, 'show');
+    })
+}
+
+function ProductDelete(objId) {
+    $.get('/Product/delete/' + objId, function (data) {
+        $('#mt').text('УДАЛЕНИЕ ЗАПИСИ');
+        $('#mb').empty().html(data);
+        $('#categoryMessages').modal({
+            keyboard: false,
+            backdrop: false
+        }, 'show');
+    })
+}
+
+function SubdirectoryToProduct(objId) {
+    __subCatId = objId;
+    $.get('/Product/index/' + objId, function (data) {
+        $('#subCategory').hide();
+        $('#product').empty().html(data).show();
+    })
+};
+
+function ProductToSubCategory() {
+    $('#product').hide();
+    $('#subCategory').show();
+}
+//============================================================

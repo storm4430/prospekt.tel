@@ -10,7 +10,9 @@ namespace prospekt.tel
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js",
-                        "~/Scripts/knockout-{version}.js"));
+                        "~/Scripts/knockout-{version}.js",
+                        "~/Scripts/app/typeahead.bundle.js",
+                        "~/Scripts/handlebars-v3.0.3.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -34,7 +36,8 @@ namespace prospekt.tel
                       "~/Content/site.css",
                       "~/Content/sb-admin-2.css",
                       "~/Content/font-awesome.css",
-                      "~/Content/metisMenu.css"));
+                      "~/Content/metisMenu.css",
+                      "~/Content/Typeahead-BS3-css.css"));
         }
     }
 }

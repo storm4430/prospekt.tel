@@ -182,12 +182,14 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Common\DataHelper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Api\PersonsController.cs" />
     <Compile Include="Controllers\Api\ProductsController.cs" />
     <Compile Include="Controllers\Api\SubCategoriesController.cs" />
     <Compile Include="Controllers\Api\CategoriesController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PersonController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\SubCategoryController.cs" />
     <Compile Include="Global.asax.cs">
@@ -226,6 +228,12 @@
     <Compile Include="Models\usp_GetCategoryById_Result.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\usp_GetPerson_Result.cs">
+      <DependentUpon>MainModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\usp_GetProductById_Result.cs">
+      <DependentUpon>MainModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\usp_GetSubCategoryById_Result.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
@@ -239,10 +247,12 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\img\Background.jpg" />
+    <Content Include="Content\img\loading16.gif" />
     <Content Include="Content\img\preLoader.gif" />
     <Content Include="Content\metisMenu.css" />
     <Content Include="Content\sb-admin-2.css" />
     <Content Include="Content\timeline.css" />
+    <Content Include="Content\Typeahead-BS3-css.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -282,12 +292,15 @@
     </Content>
     <Content Include="Scripts\affix.js" />
     <Content Include="Scripts\alert.js" />
+    <Content Include="Scripts\App\typeahead.bundle.js" />
+    <Content Include="Scripts\bloodhound.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\button.js" />
     <Content Include="Scripts\carousel.js" />
     <Content Include="Scripts\collapse.js" />
     <Content Include="Scripts\dropdown.js" />
+    <Content Include="Scripts\handlebars-v3.0.3.min.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
     <Content Include="Scripts\jquery-2.1.4.min.map" />
@@ -311,6 +324,8 @@
     <Content Include="Scripts\tab.js" />
     <Content Include="Scripts\tooltip.js" />
     <Content Include="Scripts\transition.js" />
+    <Content Include="Scripts\typeahead.bundle.js" />
+    <Content Include="Scripts\typeahead.jquery.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -358,6 +373,10 @@
     <Content Include="Views\SubCategory\Delete.cshtml" />
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Product\Insert.cshtml" />
+    <Content Include="Views\Product\Delete.cshtml" />
+    <Content Include="Views\Product\Edit.cshtml" />
+    <Content Include="Views\Person\Index.cshtml" />
+    <Content Include="Views\Person\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

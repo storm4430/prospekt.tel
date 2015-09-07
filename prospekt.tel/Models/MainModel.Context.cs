@@ -166,5 +166,102 @@ namespace prospekt.tel.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_Products_IU", idParameter, catIdParameter, subCatIdParameter, productNameParameter, createdByParameter);
         }
+    
+        public virtual ObjectResult<usp_GetProductById_Result> usp_GetProductById(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetProductById_Result>("usp_GetProductById", idParameter);
+        }
+    
+        public virtual int usp_Products_Delete(Nullable<int> id, string user)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            var userParameter = user != null ?
+                new ObjectParameter("user", user) :
+                new ObjectParameter("user", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_Products_Delete", idParameter, userParameter);
+        }
+    
+        public virtual ObjectResult<string> usp_GetPersonFIOLetters()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("usp_GetPersonFIOLetters");
+        }
+    
+        public virtual ObjectResult<usp_GetPerson_Result> usp_GetPerson(string fam, string im, string ot)
+        {
+            var famParameter = fam != null ?
+                new ObjectParameter("fam", fam) :
+                new ObjectParameter("fam", typeof(string));
+    
+            var imParameter = im != null ?
+                new ObjectParameter("im", im) :
+                new ObjectParameter("im", typeof(string));
+    
+            var otParameter = ot != null ?
+                new ObjectParameter("ot", ot) :
+                new ObjectParameter("ot", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetPerson_Result>("usp_GetPerson", famParameter, imParameter, otParameter);
+        }
+    
+        public virtual int usp_Persons_IU(Nullable<int> id, string fam, string im, string ot, Nullable<int> sex, Nullable<System.DateTime> birthday, string person_comment, string person_photo, string person_passport, string passport_serie, string passport_num, string cellPhone)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            var famParameter = fam != null ?
+                new ObjectParameter("fam", fam) :
+                new ObjectParameter("fam", typeof(string));
+    
+            var imParameter = im != null ?
+                new ObjectParameter("im", im) :
+                new ObjectParameter("im", typeof(string));
+    
+            var otParameter = ot != null ?
+                new ObjectParameter("ot", ot) :
+                new ObjectParameter("ot", typeof(string));
+    
+            var sexParameter = sex.HasValue ?
+                new ObjectParameter("sex", sex) :
+                new ObjectParameter("sex", typeof(int));
+    
+            var birthdayParameter = birthday.HasValue ?
+                new ObjectParameter("birthday", birthday) :
+                new ObjectParameter("birthday", typeof(System.DateTime));
+    
+            var person_commentParameter = person_comment != null ?
+                new ObjectParameter("person_comment", person_comment) :
+                new ObjectParameter("person_comment", typeof(string));
+    
+            var person_photoParameter = person_photo != null ?
+                new ObjectParameter("person_photo", person_photo) :
+                new ObjectParameter("person_photo", typeof(string));
+    
+            var person_passportParameter = person_passport != null ?
+                new ObjectParameter("person_passport", person_passport) :
+                new ObjectParameter("person_passport", typeof(string));
+    
+            var passport_serieParameter = passport_serie != null ?
+                new ObjectParameter("passport_serie", passport_serie) :
+                new ObjectParameter("passport_serie", typeof(string));
+    
+            var passport_numParameter = passport_num != null ?
+                new ObjectParameter("passport_num", passport_num) :
+                new ObjectParameter("passport_num", typeof(string));
+    
+            var cellPhoneParameter = cellPhone != null ?
+                new ObjectParameter("cellPhone", cellPhone) :
+                new ObjectParameter("cellPhone", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_Persons_IU", idParameter, famParameter, imParameter, otParameter, sexParameter, birthdayParameter, person_commentParameter, person_photoParameter, person_passportParameter, passport_serieParameter, passport_numParameter, cellPhoneParameter);
+        }
     }
 }

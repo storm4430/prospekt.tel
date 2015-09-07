@@ -1,0 +1,56 @@
+﻿<table class="table table-condensed table-striped table-responsive">
+    <tbody>
+        <tr>
+            <td style="border-top:none; width:30%;text-align:right;">Категория</td>
+            <td style="border-top:none">
+                <select class="form-control" id="cat">
+                    <option></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td style="border-top:none;text-align:right;">Подкатегория</td>
+            <td style="border-top:none">
+                <select class="form-control" id="subcat">
+                    <option></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td style="border-top:none;text-align:right;">Наименование</td>
+            <td style="border-top:none">
+                <input class="form-control" id="product_name" />
+            </td>
+        </tr>
+        <tr>
+            <td style="border-top:none;text-align:right;"></td>
+            <td style="border-top:none">
+                <button type="button" class="btn btn-default btn-circle" data-dismiss="modal"><span class="fa fa-undo"></span></button>
+                <button id="saveProduct" type="button" class="btn btn-success btn-circle" data-dismiss="modal">
+                    <span class="fa fa-check"></span>
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<script>
+    $(document).ready(function () {
+        var id = '';
+        $.get('/api/products/' + @ViewBag.ProductId, function (data) {
+            $('#product_name').val(data.product_name);
+            id = data.id;
+        })
+        $('#cat').empty().append('<option value="' + __catId + '">' + __catName + '</option>').attr('disabled', 'disabled');
+        $('#subcat').empty().append('<option value="' + __subCatId + '">' + __subCatName + '</option>').attr('disabled', 'disabled');
+
+        $('#saveProduct').click(function () {
+            var newObj = {
+                product_name: $('#product_name').val()
+            };
+            UpdateObject('/api/products/'+ id, newObj, 3, id);
+        })
+    })
+</script>
+
+
