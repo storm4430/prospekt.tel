@@ -123,6 +123,9 @@ function UpdateObject(dataURL, obj, objEntity, opt) {
                     case (1): GetCategories(''); break;
                     case (2): GetSubCategories(opt, ''); break;
                     case (3): Getproducts(opt, ''); break;
+                    case (4): FillPersonCard(opt, function () {
+
+                    }); break;
                 }
             }
         });

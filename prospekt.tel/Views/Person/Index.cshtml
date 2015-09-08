@@ -6,24 +6,29 @@
         <div class="col-xs-12">
             <input id="ccc" class="typeahead form-control input-sm" style="width:100%; max-width:none; margin:5px" />
         </div>
-        <div class="col-xs-12" id="lettersZone" style="text-align:center; padding-left:1px;">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="col-xs-12" id="persCard">
+                </div>
+            </div>
 
         </div>
     </div>
 
 </div>
+
 <script>
     $(document).ready(function () {
         $('#persCont').height($('#page-wrapper').height());
-        var letters = ['А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ж', 'З', 'И', 'К', 'Л', 'М', 'Н', 'О', 'П',
-        'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Э', 'Ю', 'Я'];
-        $.each(letters, function (key, item) {
-            $('#lettersZone').append('<button class="btn btn-xs btn-default btn-circle">' + item + '</button>');
-        });
+        //var letters = ['А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ж', 'З', 'И', 'К', 'Л', 'М', 'Н', 'О', 'П',
+        //'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Э', 'Ю', 'Я'];
+        //$.each(letters, function (key, item) {
+        //    $('#lettersZone').append('<button class="btn btn-xs btn-default btn-circle">' + item + '</button>');
+        //});
 
-        TypeAhead.init('#ccc', '/api/categories/?substr=%QUERY', 3, 20, 'PersonsPK',
+        TypeAhead.init('#ccc', '/api/persons/?substr=%QUERY', 3, 20, 'PersonsPK',
             {
-                handlebars: '<span class="fa fa-user fa-fw"></span>{{category_desc}}'
+                handlebars: '<span class="fa fa-user fa-fw"></span>{{fam}} {{im}} {{ot}} {{birthday}} г.р.'
             }, [
                   '<div class="empty-message">',
                   '<div class="alert alert-danger" role="alert" style="margin:5px"><span class="fa fa-exclamation-circle fa-fw"></span>Поиск не вернул результатов</div>',
@@ -31,13 +36,10 @@
                   '</div>'
             ].join('\n'),
             function (event, data) {
-                var personsPK = data.PersonsPK;
-                var fFIO = data.FullFio;
-                //$('#the-basics').hide(200);
+                var personsPK = data.id;
 
-                $.get(navUrl + '/MedCard/PersonMedCard/?personPK=' + personsPK + '&ff=' + fFIO, function (pdata) {
-                    $('#fioSearcher').slideUp(200);
-                    $('#persMedCard').html(pdata).slideDown(200);
+                $.get('/person/details/' + personsPK, function (pdata) {
+                    $('#persCard').empty().html(pdata).fadeIn("fast");
                 });
             });
     });

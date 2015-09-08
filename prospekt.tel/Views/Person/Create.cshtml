@@ -44,7 +44,7 @@
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback col-md-4" style="padding-left:1px; padding-right:1px">
-                <input class="form-control" placeholder="Пол" id="sex" />
+                <select class="form-control" id="sex"></select>
                 <span class="glyphicon glyphicon-heart-empty form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback col-md-8" style="padding-left:1px; padding-right:1px">
@@ -116,6 +116,11 @@
     });
 
     $(document).ready(function () {
+        GetSex('#sex', function () {
+
+        });
+
+
         $('#photo :file').on('fileselect', function (event, numFiles, label) {
             var tmppath = URL.createObjectURL(event.target.files[0]);
             $("#srcfp").fadeIn("fast").attr('src', tmppath);

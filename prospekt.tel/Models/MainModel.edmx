@@ -41,10 +41,20 @@
           <Parameter Name="im" Type="varchar" Mode="In" />
           <Parameter Name="ot" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="usp_GetPersonById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="admin">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
         <Function Name="usp_GetPersonFIOLetters" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="admin" />
+        <Function Name="usp_GetPersonPassScan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="admin">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_GetPersonPhoto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="admin">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
         <Function Name="usp_GetProductById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="admin">
           <Parameter Name="id" Type="int" Mode="In" />
         </Function>
+        <Function Name="usp_GetSex" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="admin" />
         <Function Name="usp_GetSubCategoryById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="admin">
           <Parameter Name="id" Type="int" Mode="In" />
         </Function>
@@ -56,8 +66,8 @@
           <Parameter Name="sex" Type="int" Mode="In" />
           <Parameter Name="birthday" Type="datetime" Mode="In" />
           <Parameter Name="person_comment" Type="varchar" Mode="In" />
-          <Parameter Name="person_photo" Type="varchar" Mode="In" />
-          <Parameter Name="person_passport" Type="varchar" Mode="In" />
+          <Parameter Name="person_photo" Type="varchar(max)" Mode="In" />
+          <Parameter Name="person_passport" Type="varchar(max)" Mode="In" />
           <Parameter Name="passport_serie" Type="varchar" Mode="In" />
           <Parameter Name="passport_num" Type="varchar" Mode="In" />
           <Parameter Name="cellPhone" Type="varchar" Mode="In" />
@@ -170,6 +180,16 @@
             <Parameter Name="passport_num" Mode="In" Type="String" />
             <Parameter Name="cellPhone" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="usp_GetSex" ReturnType="Collection(popshopModel.usp_GetSex_Result)" />
+          <FunctionImport Name="usp_GetPersonById" ReturnType="Collection(popshopModel.usp_GetPersonById_Result)">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_GetPersonPhoto" ReturnType="Collection(String)">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_GetPersonPassScan" ReturnType="Collection(String)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="usp_GetAllCategories_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
@@ -226,19 +246,38 @@
           <Property Type="String" Name="fam" Nullable="false" MaxLength="40" />
           <Property Type="String" Name="im" Nullable="false" MaxLength="40" />
           <Property Type="String" Name="ot" Nullable="true" MaxLength="40" />
-          <Property Type="Int32" Name="sex" Nullable="false" />
-          <Property Type="DateTime" Name="birthday" Nullable="false" Precision="23" />
-          <Property Type="DateTime" Name="created" Nullable="false" Precision="23" />
-          <Property Type="DateTime" Name="updated" Nullable="false" Precision="23" />
-          <Property Type="String" Name="person_comment" Nullable="false" MaxLength="1024" />
-          <Property Type="Int32" Name="person_photo" Nullable="false" />
-          <Property Type="Int32" Name="person_passport" Nullable="false" />
-          <Property Type="String" Name="passport_serie" Nullable="false" MaxLength="5" />
-          <Property Type="String" Name="passport_num" Nullable="false" MaxLength="6" />
-          <Property Type="Boolean" Name="sysStatus" Nullable="false" />
-          <Property Type="String" Name="cellPhone" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="birthday" Nullable="true" MaxLength="11" />
           <Property Type="String" Name="pers_photo" Nullable="false" MaxLength="512" />
           <Property Type="String" Name="pass_scan" Nullable="false" MaxLength="512" />
+          <Property Type="Int32" Name="sex" Nullable="false" />
+          <Property Type="String" Name="sex_desc" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="passport_serie" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="passport_num" Nullable="false" MaxLength="6" />
+          <Property Type="String" Name="cellPhone" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="person_comment" Nullable="false" MaxLength="1024" />
+          <Property Type="DateTime" Name="dr" Nullable="false" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="usp_GetSex_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="description" Nullable="false" MaxLength="1" />
+        </ComplexType>
+        <ComplexType Name="usp_GetPersonById_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="fam" Nullable="false" MaxLength="40" />
+          <Property Type="String" Name="im" Nullable="false" MaxLength="40" />
+          <Property Type="String" Name="ot" Nullable="true" MaxLength="40" />
+          <Property Type="String" Name="birthday" Nullable="true" MaxLength="11" />
+          <Property Type="DateTime" Name="dr" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="sex" Nullable="false" />
+          <Property Type="String" Name="sex_desc" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="passport_serie" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="passport_num" Nullable="false" MaxLength="6" />
+          <Property Type="String" Name="cellPhone" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="person_comment" Nullable="false" MaxLength="1024" />
+          <Property Type="String" Name="pers_photo" Nullable="false" MaxLength="512" />
+          <Property Type="String" Name="pass_scan" Nullable="false" MaxLength="512" />
+          <Property Type="String" Name="created" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="updated" Nullable="true" MaxLength="20" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -344,23 +383,52 @@
                 <ScalarProperty Name="fam" ColumnName="fam" />
                 <ScalarProperty Name="im" ColumnName="im" />
                 <ScalarProperty Name="ot" ColumnName="ot" />
-                <ScalarProperty Name="sex" ColumnName="sex" />
                 <ScalarProperty Name="birthday" ColumnName="birthday" />
-                <ScalarProperty Name="created" ColumnName="created" />
-                <ScalarProperty Name="updated" ColumnName="updated" />
-                <ScalarProperty Name="person_comment" ColumnName="person_comment" />
-                <ScalarProperty Name="person_photo" ColumnName="person_photo" />
-                <ScalarProperty Name="person_passport" ColumnName="person_passport" />
-                <ScalarProperty Name="passport_serie" ColumnName="passport_serie" />
-                <ScalarProperty Name="passport_num" ColumnName="passport_num" />
-                <ScalarProperty Name="sysStatus" ColumnName="sysStatus" />
-                <ScalarProperty Name="cellPhone" ColumnName="cellPhone" />
                 <ScalarProperty Name="pers_photo" ColumnName="pers_photo" />
                 <ScalarProperty Name="pass_scan" ColumnName="pass_scan" />
+                <ScalarProperty Name="sex" ColumnName="sex" />
+                <ScalarProperty Name="sex_desc" ColumnName="sex_desc" />
+                <ScalarProperty Name="passport_serie" ColumnName="passport_serie" />
+                <ScalarProperty Name="passport_num" ColumnName="passport_num" />
+                <ScalarProperty Name="cellPhone" ColumnName="cellPhone" />
+                <ScalarProperty Name="person_comment" ColumnName="person_comment" />
+                <ScalarProperty Name="dr" ColumnName="dr" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="usp_Persons_IU" FunctionName="Хранилище popshopModel.usp_Persons_IU" />
+          <FunctionImportMapping FunctionImportName="usp_GetSex" FunctionName="Хранилище popshopModel.usp_GetSex">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="popshopModel.usp_GetSex_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_GetPersonById" FunctionName="Хранилище popshopModel.usp_GetPersonById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="popshopModel.usp_GetPersonById_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="fam" ColumnName="fam" />
+                <ScalarProperty Name="im" ColumnName="im" />
+                <ScalarProperty Name="ot" ColumnName="ot" />
+                <ScalarProperty Name="birthday" ColumnName="birthday" />
+                <ScalarProperty Name="dr" ColumnName="dr" />
+                <ScalarProperty Name="sex" ColumnName="sex" />
+                <ScalarProperty Name="sex_desc" ColumnName="sex_desc" />
+                <ScalarProperty Name="passport_serie" ColumnName="passport_serie" />
+                <ScalarProperty Name="passport_num" ColumnName="passport_num" />
+                <ScalarProperty Name="cellPhone" ColumnName="cellPhone" />
+                <ScalarProperty Name="person_comment" ColumnName="person_comment" />
+                <ScalarProperty Name="pers_photo" ColumnName="pers_photo" />
+                <ScalarProperty Name="pass_scan" ColumnName="pass_scan" />
+                <ScalarProperty Name="created" ColumnName="created" />
+                <ScalarProperty Name="updated" ColumnName="updated" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_GetPersonPhoto" FunctionName="Хранилище popshopModel.usp_GetPersonPhoto" />
+          <FunctionImportMapping FunctionImportName="usp_GetPersonPassScan" FunctionName="Хранилище popshopModel.usp_GetPersonPassScan" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

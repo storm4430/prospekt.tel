@@ -182,8 +182,12 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Common\DataHelper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Api\PersonFullScansController.cs" />
+    <Compile Include="Controllers\Api\PersonPhotosController.cs" />
+    <Compile Include="Controllers\Api\PersonScansController.cs" />
     <Compile Include="Controllers\Api\PersonsController.cs" />
     <Compile Include="Controllers\Api\ProductsController.cs" />
+    <Compile Include="Controllers\Api\SexController.cs" />
     <Compile Include="Controllers\Api\SubCategoriesController.cs" />
     <Compile Include="Controllers\Api\CategoriesController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
@@ -228,10 +232,16 @@
     <Compile Include="Models\usp_GetCategoryById_Result.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\usp_GetPersonById_Result.cs">
+      <DependentUpon>MainModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\usp_GetPerson_Result.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\usp_GetProductById_Result.cs">
+      <DependentUpon>MainModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\usp_GetSex_Result.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\usp_GetSubCategoryById_Result.cs">
@@ -377,6 +387,7 @@
     <Content Include="Views\Product\Edit.cshtml" />
     <Content Include="Views\Person\Index.cshtml" />
     <Content Include="Views\Person\Create.cshtml" />
+    <Content Include="Views\Person\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

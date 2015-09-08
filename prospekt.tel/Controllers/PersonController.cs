@@ -19,5 +19,11 @@ namespace prospekt.tel.Controllers
         {
             return PartialView();
         }
+
+        public ActionResult Details(int id)
+        {
+            ViewBag.PersPK = id;
+            return PartialView();
+        }
     }
 }

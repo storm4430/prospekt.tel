@@ -1,0 +1,181 @@
+﻿<style>
+    input, textarea {
+        max-width: none;
+    }
+
+    .btn-file {
+        position: relative;
+        overflow: hidden;
+    }
+
+        .btn-file input[type=file] {
+            position: absolute;
+            top: 0;
+            right: 0;
+            min-width: 100%;
+            min-height: 100%;
+            font-size: 100px;
+            text-align: right;
+            filter: alpha(opacity=0);
+            opacity: 0;
+            background: red;
+            cursor: inherit;
+            display: block;
+        }
+
+    input[readonly] {
+        background-color: white !important;
+        cursor: text !important;
+    }
+</style>
+<div class="panel panel-default" style="margin-left:10px">
+    <div class="panel-heading" style="height:40px">
+        <div id="cont_info" class="pull-left">
+
+        </div>
+        <div class="pull-right">
+            <div class="btn-group">
+                <button type="button" id="actionsButton" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                    Операции
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu pull-right" role="menu">
+                    <li>
+                        <a href="#" id="editCard">Внести изменения</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="pull-right" id="_saveCardButton" hidden>
+            <button id="saveCardButton" class="btn btn-success btn-xs">
+                Сохранить
+            </button>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="col-xs-offset-1 col-xs-10">
+            <form>
+                <div class="col-md-8">
+                    <input id="id" hidden />
+                    <div class="form-group has-feedback">
+                        <input class="form-control" type="text" placeholder="Фамилия" autofocus id="fam" required pattern="[  -;&quot;А-Яа-яЁё]{1,}" spellcheck="false" title="Фамилия должна быть на русском языке" />
+                        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input class="form-control" type="text" placeholder="Имя" autofocus id="im" required pattern="[  -;&quot;А-Яа-яЁё]{1,}" spellcheck="false" title="Имя должно быть на русском языке" />
+                        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input class="form-control" type="text" placeholder="Отчество" autofocus id="ot" required pattern="[  -;&quot;А-Яа-яЁё]{1,}" spellcheck="false" title="Отчество должна быть на русском языке" />
+                        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                    </div>
+                    <div class="form-group has-feedback col-md-4" style="padding-left:1px; padding-right:1px">
+                        <select class="form-control" id="sex"></select>
+                        <span class="glyphicon glyphicon-heart-empty form-control-feedback"></span>
+                    </div>
+                    <div class="form-group has-feedback col-md-8" style="padding-left:1px; padding-right:1px">
+                        <input type="date" class="form-control" placeholder="Дата рождения" id="dr" required />
+                        <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
+                    </div>
+                    <div class="form-group has-feedback col-md-5" style="padding-left:1px; padding-right:1px">
+                        <input class="form-control" placeholder="Серия паспорта" id="doc_ser" required pattern="[  -;А-Яа-яЁё]{4,}" spellcheck="false" title="ФИО бухгалтера должно быть на русском языке и указываться полностью" />
+                        <span class="glyphicon glyphicon-list form-control-feedback"></span>
+                    </div>
+                    <div class="form-group has-feedback col-md-7" style="padding-left:1px; padding-right:1px">
+                        <input class="form-control" placeholder="Номер паспорта" id="doc_num" required pattern="[  -;А-Яа-яЁё]{4,}" spellcheck="false" title="ФИО бухгалтера должно быть на русском языке и указываться полностью" />
+                        <span class="glyphicon glyphicon-th-list form-control-feedback"></span>
+                    </div>
+                    <div class="form-group has-feedback col-md-12" style="padding-left:1px; padding-right:1px">
+                        <input class="form-control" type="text" placeholder="Телефон" autofocus id="cellPhone" required pattern="[  -;&quot;А-Яа-яЁё]{1,}" spellcheck="false" title="Отчество должна быть на русском языке" />
+                        <span class="glyphicon glyphicon-phone-alt form-control-feedback"></span>
+                    </div>
+                    <div class="form-group has-feedback col-md-12" style="padding-left:1px; padding-right:1px">
+                        <textarea class="form-control" placeholder="Комментарий" id="comment" required spellcheck="false" style="resize:none" />
+                        <span class="glyphicon glyphicon-comment form-control-feedback"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div>
+                        <img id="srcfp" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMHBhAQEBQQEhAVEg4QDRQVDQ8NDxYPFREWFxUUExYYHTQsGBolGxUVITEhJSkrLi4uFyAzODMsNygtLysBCgoKBQUFDgUFDisZExkrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrK//AABEIAKwBJAMBIgACEQEDEQH/xAAaAAEBAAMBAQAAAAAAAAAAAAAAAQQFBgMC/8QAMxABAAIABAMGBAUEAwAAAAAAAAECAwQFERIhMUFRYXGBkRMiscEyNKHR4WKC8PFCUnL/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8A74AAAAAAAAAAAAAAHxjY1cDD4rTtH+dAfY1OJrPP5a+8/aGPiariXnltWPCN/qDfDn66piV7YnzrDMyurxe214iPGOnqDaCVnijeOcdigAAAAAAAAAAAAAAAAAAAAAAAAAAAAAATPDG89O1zWczE5nGmZ6f8Y7obvU7cGRv5RHvLnQAAAAbLRszNcb4c9J328JbpylLcF4mOsTvDqcO3HSJ74iQfQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMDWvyf90b/AKtE6TUKfEyV48N49ObmwAAAAHT5T8rT/wA1+jmHVYUxbCjbnG0bA+gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYer/AJGfOu/u590WpxNsjfbuj6w50AAAAB0uRrwZOkf0x+7nMPCtiz8sTPZyjd1GFHDhViesRET57A+gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOsNJrOBGDak1iIiYtHKNucf7btj5/AjHy1onrETNfOAc2AAADdaFXbAtPfbl6Q2TxydYrlaRHThrPrMby9gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHlmsWMDAta3Tp48+T1aXV85GLtSs7xE72ns37Nv1BrQAAAbzSc38bD4J2iaxG3jVsHLYOLOBixavWG8ympVx+U/Lbx6T5SDNAAAAAAAAAAAAAAABQAAAAAAAAJnaN/cB82tFI3mYiPGdmizGp3xbcp4Y7Ijr6yw7Wm87zMzPjO4Oivn8OnW8em9vowsxrHZSPWf2akB64+Zvj/AIrTPh0j2eKgIKAgoCGygPTCzFsH8Npj15ezLw9WvXrw29Np/RgANvTWY251n0tEvumr0tPOLR7S0oDp8HMVx/w2ifr7PVycTtLodLx5x8rEzzmJmsgywAAAAAAAAABQEFAQUBBQEY+o24MlefDb3nb7slr9axOHKRHfaPaOf7A0QoCCgIKAgoCCgIKAgoCCgI2+hX+S9fGJ+32aln6Lfhzcx31n3jn+4N4KAgoCCgIKAgoCgAAAAAAANLrtt8akd0TPvP8ADdNDrU753yrX7gwAAAAAAAAAAAAAAAAGRkL/AA85Sf6oj35MdY5SDrB55bE+Nl6274jfz7XoAAAAAAAACgAAAAAAAOZz+N8fN2tHTfaPKOTeali/BydpjrPyx6uc2BBQEFAQUBBQEFAQUBBQEFAQUBu9DxeLL2r3Ty8p/ndsmh0XE4M5t/2iY9Y5x92+AAAAAAABQAAAAAAAAajXsT8FPO0/SPu1DN1e2+ft4RWI8tmEAAAAAAAAAAAAAAAAAAD0y+J8LMVt3WifTfm6pyLqcrbiytJnrNazPsD1AAAAAAAB/9k=" alt="..." class="img-thumbnail" style="width:200px;">
+                    </div>
+                    <div style="padding:10px" id="butForPhotoUpdate" hidden>
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                                <span class="btn btn-outline btn-primary btn-xs btn-file">
+                                    Изменить фото <input type="file" accept=".jpg" id="photo">
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-12" style="padding:10px">
+                        <h5>Скан документа</h5>
+                        <a style="cursor:pointer" id="pass_scan"></a>
+
+                        @*<div class="input-group">
+                                <span class="input-group-btn">
+                                    <span class="btn btn-outline btn-primary btn-xs btn-file" id="scan2">
+                                        Загрузить скан <input type="file" accept=".pdf" id="scan">
+                                    </span>
+                                </span>
+                            </div>*@
+                    </div>
+                    <div class="col-md-12">
+                        <h5 id="files" style="width:100%; margin-left:-15px" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).on('change', '.btn-file :file', function () {
+        var input = $(this),
+            numFiles = input.get(0).files ? input.get(0).files.length : 1,
+            label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+        input.trigger('fileselect', [numFiles, label]);
+    });
+    $(document).ready(function () {
+        GetSex('#sex', function () {
+            FillPersonCard(@ViewBag.PersPK, function () {
+                $('#photo :file').on('fileselect', function (event, numFiles, label) {
+                    console.log('asdgasfgh');
+                    var tmppath = URL.createObjectURL(event.target.files[0]);
+                    $("#srcfp").fadeIn("fast").attr('src', tmppath);
+                });
+
+                $('#photo').change(function (event) {
+                    var tmppath = URL.createObjectURL(event.target.files[0]);
+                    $("#srcfp").fadeIn("fast").attr('src', tmppath);
+                });
+            });
+        });
+
+        
+
+        $('#saveCardButton').click(function () {
+            if ($("form")[0].checkValidity()) {
+                var formData = {
+                    id: $('#id').val(),
+                    fam: $('#fam').val(),
+                    im: $('#im').val(),
+                    ot: $('#ot').val(),
+                    sex: $('#sex').val(),
+                    dr: $('#dr').val(),
+                    passport_serie: $('#doc_ser').val(),
+                    passport_num: $('#doc_num').val(),
+                    cellPhone: $('#cellPhone').val(),
+                    person_comment: $('#comment').val()
+                };
+                console.log(formData);
+                UpdateObject('/api/persons', formData, 4, formData.id);
+                $('#actionsButton').show();
+                $('#_saveCardButton').hide();
+            }
+            else {
+                console.log('Заполнены не все обязательные поля');
+                $('#errMsg').empty().fadeIn('fast').text('Заполнены не все обязательные поля').fadeOut(3000);
+            }
+
+        });
+    });
+</script>

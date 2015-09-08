@@ -263,5 +263,37 @@ namespace prospekt.tel.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_Persons_IU", idParameter, famParameter, imParameter, otParameter, sexParameter, birthdayParameter, person_commentParameter, person_photoParameter, person_passportParameter, passport_serieParameter, passport_numParameter, cellPhoneParameter);
         }
+    
+        public virtual ObjectResult<usp_GetSex_Result> usp_GetSex()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetSex_Result>("usp_GetSex");
+        }
+    
+        public virtual ObjectResult<usp_GetPersonById_Result> usp_GetPersonById(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetPersonById_Result>("usp_GetPersonById", idParameter);
+        }
+    
+        public virtual ObjectResult<string> usp_GetPersonPhoto(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("usp_GetPersonPhoto", idParameter);
+        }
+    
+        public virtual ObjectResult<string> usp_GetPersonPassScan(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("usp_GetPersonPassScan", idParameter);
+        }
     }
 }

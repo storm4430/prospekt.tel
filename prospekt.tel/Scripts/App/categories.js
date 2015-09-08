@@ -208,7 +208,7 @@ function PersonCreate() {
     })
 }
 
-function ProductDelete(objId) {
+function PersonDelete(objId) {
     $.get('/Product/delete/' + objId, function (data) {
         $('#mt').text('УДАЛЕНИЕ ЗАПИСИ');
         $('#mb').empty().html(data);
@@ -219,16 +219,67 @@ function ProductDelete(objId) {
     })
 }
 
-function SubdirectoryToProduct(objId) {
-    __subCatId = objId;
-    $.get('/Product/index/' + objId, function (data) {
-        $('#subCategory').hide();
-        $('#product').empty().html(data).show();
-    })
+function GetSex(dest, callback) {
+    $.get('/api/sex/', function (data) {
+        $(dest).empty().append('<option></option>')
+        $.each(data, function (key, item) {
+            $(dest).append('<option value="' + item.id + '">' + item.description + '</option>');
+        });
+    });
+    callback();
 };
 
-function ProductToSubCategory() {
-    $('#product').hide();
-    $('#subCategory').show();
+function FillPersonCard(id, callback) {
+    $.get('/api/persons/' + id, function (data) {
+        $('#persCard #id').val(data.id);
+        $('#persCard #fam').val(data.fam).attr('disabled', 'disabled');
+        $('#persCard #im').val(data.im).attr('disabled', 'disabled');
+        $('#persCard #ot').val(data.ot).attr('disabled', 'disabled');
+        $('#persCard #sex').val(data.sex).attr('disabled', 'disabled');
+        $('#persCard #dr').val(data.dr.substring(0, 10)).attr('disabled', 'disabled');
+        $('#persCard #doc_ser').val(data.passport_serie).attr('disabled', 'disabled');
+        $('#persCard #doc_num').val(data.passport_num).attr('disabled', 'disabled');
+        $('#persCard #cellPhone').val(data.cellPhone).attr('disabled', 'disabled');
+        $('#persCard #comment').val(data.person_comment).attr('disabled', 'disabled');
+        $('#persCard #cont_info').empty().append('<strong>Уникальный код контрагента:</strong> ' + id)
+                                 .append('.    <strong>Запись создана:</strong> ' + data.created)
+                                 .append('.    <strong>Последнее редактирование:</strong> ' + data.updated);
+        $('#butForPhotoUpdate').hide();
+        GetPersonPhoto(data.id);
+        GetPersonPassScan(data.id);
+        $('#editCard').click(function (e) {
+            $('#persCard #fam').removeAttr('disabled').focus();
+            $('#persCard #im').removeAttr('disabled');
+            $('#persCard #ot').removeAttr('disabled');
+            $('#persCard #sex').removeAttr('disabled');
+            $('#persCard #dr').removeAttr('disabled');
+            $('#persCard #doc_ser').removeAttr('disabled');
+            $('#persCard #doc_num').removeAttr('disabled');
+            $('#persCard #cellPhone').removeAttr('disabled');
+            $('#persCard #comment').removeAttr('disabled');
+            $('#actionsButton').hide();
+            $('#butForPhotoUpdate').show();
+            $('#_saveCardButton').show();
+            e.preventDefault();
+        })
+        callback();
+    });
+};
+
+function GetPersonPhoto(id) {
+    $.get('/api/personphotos/' + id, function (data) {
+        $("#srcfp").fadeIn("fast").attr('src', data);
+    });
+};
+
+function GetPersonPassScan(id) {
+    $.get('/api/personscans/' + id, function (data) {
+        $("#pass_scan").fadeIn("fast").text(data).attr('data-id', id).attr('onclick', 'GetGullScan(this)');
+    });
+};
+
+function GetGullScan(obj) {
+    var sId = $(obj).data('id');
+    window.open('/api/PersonFullScans/'+sId, 'blank')
 }
 //============================================================

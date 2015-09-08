@@ -11,21 +11,9 @@ namespace prospekt.tel.Models
 {
     using System;
     
-    public partial class usp_GetPerson_Result
+    public partial class usp_GetSex_Result
     {
         public int id { get; set; }
-        public string fam { get; set; }
-        public string im { get; set; }
-        public string ot { get; set; }
-        public string birthday { get; set; }
-        public string pers_photo { get; set; }
-        public string pass_scan { get; set; }
-        public int sex { get; set; }
-        public string sex_desc { get; set; }
-        public string passport_serie { get; set; }
-        public string passport_num { get; set; }
-        public string cellPhone { get; set; }
-        public string person_comment { get; set; }
-        public System.DateTime dr { get; set; }
+        public string description { get; set; }
     }
 }
