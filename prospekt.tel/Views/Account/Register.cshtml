@@ -5,63 +5,58 @@
 
 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
-    @Html.AntiForgeryToken()
-
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4 col-md-offset-4">
-                <div class="login-panel panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Регистрация нового пользователя</h3>
+    <div class="row ">
+        <div class="col-xs-offset-2 col-xs-8">
+            <form role="form">
+                @Html.AntiForgeryToken()
+                <fieldset>
+                    @Html.ValidationSummary("", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", placeholder = "Логин пользователя" })
                     </div>
-                    <div class="panel-body">
-                        <form role="form">
-                            <fieldset>
-                                @Html.ValidationSummary("", new { @class = "text-danger" })
-                                <div class="form-group">
-                                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", placeholder = "Логин пользователя" })
-                                </div>
-                                <div class="form-group">
-                                    @Html.TextBoxFor(m => m.OrgId, new { @class = "form-control", placeholder = "Отделение" })
-                                </div>
-                                <div class="form-group">
-                                    @Html.TextBoxFor(m => m.UserFam, new { @class = "form-control", placeholder = "Фамилия пользователя" })
-                                </div>
-                                <div class="form-group">
-                                    @Html.TextBoxFor(m => m.UserIm, new { @class = "form-control", placeholder = "Имя пользователя" })
-                                </div>
-                                <div class="form-group">
-                                    @Html.TextBoxFor(m => m.UserOt, new { @class = "form-control", placeholder = "Отчество пользователя" })
-                                </div>
-                                <div class="form-group">
-                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Электронная почта" })
-                                </div>
-                                <div class="form-group">
-                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Пароль" })
-                                </div>
-                                <div class="form-group">
-                                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", placeholder = "Повтор пароля" })
-                                </div>
-                                @*<div class="checkbox">
-                <label>
-                    <input name="remember" type="checkbox" value="Remember Me">Remember Me
-                </label>
-            </div>*@
-                                <!-- Change this to a button or input when using this as a form -->
-                                <input type="submit" class="btn btn-lg btn-success btn-block" value="Регистрация" />
-                                @*<a href="index.html" class="btn btn-lg btn-success btn-block">Login</a>*@
-                            </fieldset>
-                        </form>
+                    <div class="form-group">
+                        @*Html.TextBoxFor(m => m.OrgId, new { @class = "form-control", placeholder = "Отделение" })*@
+                        <select id="OrgId" name="OrgId" class="form-control"></select>
                     </div>
-                </div>
-            </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(m => m.UserFam, new { @class = "form-control", placeholder = "Фамилия пользователя" })
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(m => m.UserIm, new { @class = "form-control", placeholder = "Имя пользователя" })
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(m => m.UserOt, new { @class = "form-control", placeholder = "Отчество пользователя" })
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Электронная почта" })
+                    </div>
+                    <div class="form-group">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Пароль" })
+                    </div>
+                    <div class="form-group">
+                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", placeholder = "Повтор пароля" })
+                    </div>
+                    @*<div class="checkbox">
+                            <label>
+                                <input name="remember" type="checkbox" value="Remember Me">Remember Me
+                            </label>
+                        </div>*@
+                    <!-- Change this to a button or input when using this as a form -->
+                    <input type="submit" style="margin-left:0" class="btn btn-lg btn-success btn-block" value="Регистрация" />
+                    @*<a href="index.html" class="btn btn-lg btn-success btn-block">Login</a>*@
+                </fieldset>
+            </form>
         </div>
+        @*________________________________________________________________________*@
     </div>
-
-    @*________________________________________________________________________*@
-
+    <script>
+        $(document).ready(function () {
+            GetOrgsForRegister('#OrgId');
+        })
+    </script>
 }
 
 @section Scripts {
+
     @Scripts.Render("~/bundles/jqueryval")
 }

@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using prospekt.tel.Models;
+using System.IO;
 
 namespace prospekt.tel.Controllers.Api
 {
@@ -15,8 +16,8 @@ namespace prospekt.tel.Controllers.Api
 
         public string Get(int id)
         {
-            var imagePath = db.usp_GetPersonPassScan(id).FirstOrDefault();
-            return imagePath;
+            var result = db.usp_GetPersonPassScan(id).FirstOrDefault();
+            return Path.GetFileName(result);
         }
     }
 }

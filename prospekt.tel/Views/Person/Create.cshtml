@@ -152,7 +152,7 @@
                 formData.append('doc_num', $('#doc_num').val());
                 formData.append('cellPhone', $('#cellPhone').val());
                 formData.append('comment', $('#comment').val());
-                NewObject('/api/persons', formData, 4, '');
+                NewInvocObject('/api/persons', formData, 4, '');
             }
             else {
                 $('#errMsg').empty().fadeIn('fast').text('Заполнены не все обязательные поля').fadeOut(3000);

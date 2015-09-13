@@ -295,5 +295,99 @@ namespace prospekt.tel.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("usp_GetPersonPassScan", idParameter);
         }
+    
+        public virtual int usp_Photos_Update(Nullable<int> id, string photoPath)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            var photoPathParameter = photoPath != null ?
+                new ObjectParameter("photoPath", photoPath) :
+                new ObjectParameter("photoPath", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_Photos_Update", idParameter, photoPathParameter);
+        }
+    
+        public virtual int usp_Scans_Update(Nullable<int> id, string scanPath)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            var scanPathParameter = scanPath != null ?
+                new ObjectParameter("scanPath", scanPath) :
+                new ObjectParameter("scanPath", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_Scans_Update", idParameter, scanPathParameter);
+        }
+    
+        public virtual ObjectResult<usp_GetAllUsers_Result> usp_GetAllUsers(string substr)
+        {
+            var substrParameter = substr != null ?
+                new ObjectParameter("Substr", substr) :
+                new ObjectParameter("Substr", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetAllUsers_Result>("usp_GetAllUsers", substrParameter);
+        }
+    
+        public virtual int usp_Orgs_IU(Nullable<System.Guid> id, string orgName, string orgINN, string orgOGRN, string orgAdress, string orgRukFam, string orgRukIm, string orgRukOt)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(System.Guid));
+    
+            var orgNameParameter = orgName != null ?
+                new ObjectParameter("orgName", orgName) :
+                new ObjectParameter("orgName", typeof(string));
+    
+            var orgINNParameter = orgINN != null ?
+                new ObjectParameter("orgINN", orgINN) :
+                new ObjectParameter("orgINN", typeof(string));
+    
+            var orgOGRNParameter = orgOGRN != null ?
+                new ObjectParameter("orgOGRN", orgOGRN) :
+                new ObjectParameter("orgOGRN", typeof(string));
+    
+            var orgAdressParameter = orgAdress != null ?
+                new ObjectParameter("orgAdress", orgAdress) :
+                new ObjectParameter("orgAdress", typeof(string));
+    
+            var orgRukFamParameter = orgRukFam != null ?
+                new ObjectParameter("orgRukFam", orgRukFam) :
+                new ObjectParameter("orgRukFam", typeof(string));
+    
+            var orgRukImParameter = orgRukIm != null ?
+                new ObjectParameter("orgRukIm", orgRukIm) :
+                new ObjectParameter("orgRukIm", typeof(string));
+    
+            var orgRukOtParameter = orgRukOt != null ?
+                new ObjectParameter("orgRukOt", orgRukOt) :
+                new ObjectParameter("orgRukOt", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_Orgs_IU", idParameter, orgNameParameter, orgINNParameter, orgOGRNParameter, orgAdressParameter, orgRukFamParameter, orgRukImParameter, orgRukOtParameter);
+        }
+    
+        public virtual ObjectResult<usp_GetAllOrgs_Result> usp_GetAllOrgs(string substr)
+        {
+            var substrParameter = substr != null ?
+                new ObjectParameter("substr", substr) :
+                new ObjectParameter("substr", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetAllOrgs_Result>("usp_GetAllOrgs", substrParameter);
+        }
+    
+        public virtual ObjectResult<usp_GetAllContracts_Result> usp_GetAllContracts(Nullable<System.Guid> orgId, string substr)
+        {
+            var orgIdParameter = orgId.HasValue ?
+                new ObjectParameter("orgId", orgId) :
+                new ObjectParameter("orgId", typeof(System.Guid));
+    
+            var substrParameter = substr != null ?
+                new ObjectParameter("substr", substr) :
+                new ObjectParameter("substr", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetAllContracts_Result>("usp_GetAllContracts", orgIdParameter, substrParameter);
+        }
     }
 }

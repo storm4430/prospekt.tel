@@ -1,10 +1,13 @@
-@import url(http://fonts.googleapis.com/css?family=Cuprum:400,400italic,700,700italic&subset=latin,cyrillic);
+/*@import url(https://fonts.googleapis.com/css?family=Cuprum:400,400italic,700,700italic&subset=latin,cyrillic);*/
 /*!
- * Bootstrap v3.3.4 (http://getbootstrap.com)
+ * Bootstrap v3.3.4 (https://getbootstrap.com)
  * Copyright 2011-2015 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
-
+@font-face {
+    font-family: 'Cuprum';
+    src: url('../fonts/CuprumRegular.woff') format('woff');
+}
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
 html {
   font-family: 'Cuprum', sans-serif;

@@ -182,6 +182,8 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Common\DataHelper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Api\ContractsController.cs" />
+    <Compile Include="Controllers\Api\OrgsController.cs" />
     <Compile Include="Controllers\Api\PersonFullScansController.cs" />
     <Compile Include="Controllers\Api\PersonPhotosController.cs" />
     <Compile Include="Controllers\Api\PersonScansController.cs" />
@@ -190,12 +192,16 @@
     <Compile Include="Controllers\Api\SexController.cs" />
     <Compile Include="Controllers\Api\SubCategoriesController.cs" />
     <Compile Include="Controllers\Api\CategoriesController.cs" />
+    <Compile Include="Controllers\Api\UsersController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\ContractController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OrgController.cs" />
     <Compile Include="Controllers\PersonController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\SubCategoryController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -223,10 +229,19 @@
     <Compile Include="Models\usp_GetAllCategories_Result.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\usp_GetAllContracts_Result.cs">
+      <DependentUpon>MainModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\usp_GetAllOrgs_Result.cs">
+      <DependentUpon>MainModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\usp_GetAllProducts_Result.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\usp_GetAllSubCategoriesByCategoryID_Result.cs">
+      <DependentUpon>MainModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\usp_GetAllUsers_Result.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\usp_GetCategoryById_Result.cs">
@@ -288,6 +303,7 @@
     <Content Include="Scripts\App\categories.js" />
     <Content Include="Scripts\App\DataTable.js" />
     <Content Include="Scripts\App\int.navigation.js" />
+    <Content Include="fonts\CuprumRegular.woff" />
     <None Include="Properties\PublishProfiles\prospect17.pubxml" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Models\MainModel.Context.tt">
@@ -388,6 +404,11 @@
     <Content Include="Views\Person\Index.cshtml" />
     <Content Include="Views\Person\Create.cshtml" />
     <Content Include="Views\Person\Details.cshtml" />
+    <Content Include="Views\Org\Index.cshtml" />
+    <Content Include="Views\Org\Insert.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\Contract\Index.cshtml" />
+    <Content Include="Views\Contract\Insert.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

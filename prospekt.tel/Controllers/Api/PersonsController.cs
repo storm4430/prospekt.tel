@@ -35,6 +35,7 @@ namespace prospekt.tel.Controllers.Api
             try
             {
                 var result = db.usp_GetPersonById(id).FirstOrDefault();
+                
                 return Ok(result);
             }
             catch (Exception ex)

@@ -235,7 +235,7 @@ function FillPersonCard(id, callback) {
         $('#persCard #fam').val(data.fam).attr('disabled', 'disabled');
         $('#persCard #im').val(data.im).attr('disabled', 'disabled');
         $('#persCard #ot').val(data.ot).attr('disabled', 'disabled');
-        $('#persCard #sex').val(data.sex).attr('disabled', 'disabled');
+        $('#persCard #sexed').val(data.sex).attr('disabled', 'disabled');
         $('#persCard #dr').val(data.dr.substring(0, 10)).attr('disabled', 'disabled');
         $('#persCard #doc_ser').val(data.passport_serie).attr('disabled', 'disabled');
         $('#persCard #doc_num').val(data.passport_num).attr('disabled', 'disabled');
@@ -245,13 +245,14 @@ function FillPersonCard(id, callback) {
                                  .append('.    <strong>Запись создана:</strong> ' + data.created)
                                  .append('.    <strong>Последнее редактирование:</strong> ' + data.updated);
         $('#butForPhotoUpdate').hide();
+        $('#butForScanUpdate').hide();
         GetPersonPhoto(data.id);
         GetPersonPassScan(data.id);
         $('#editCard').click(function (e) {
             $('#persCard #fam').removeAttr('disabled').focus();
             $('#persCard #im').removeAttr('disabled');
             $('#persCard #ot').removeAttr('disabled');
-            $('#persCard #sex').removeAttr('disabled');
+            $('#persCard #sexed').removeAttr('disabled');
             $('#persCard #dr').removeAttr('disabled');
             $('#persCard #doc_ser').removeAttr('disabled');
             $('#persCard #doc_num').removeAttr('disabled');
@@ -259,6 +260,7 @@ function FillPersonCard(id, callback) {
             $('#persCard #comment').removeAttr('disabled');
             $('#actionsButton').hide();
             $('#butForPhotoUpdate').show();
+            $('#butForScanUpdate').show();
             $('#_saveCardButton').show();
             e.preventDefault();
         })
@@ -268,7 +270,7 @@ function FillPersonCard(id, callback) {
 
 function GetPersonPhoto(id) {
     $.get('/api/personphotos/' + id, function (data) {
-        $("#srcfp").fadeIn("fast").attr('src', data);
+        $("#srcfped").fadeIn("fast").attr('src', data);
     });
 };
 
@@ -283,3 +285,89 @@ function GetGullScan(obj) {
     window.open('/api/PersonFullScans/'+sId, 'blank')
 }
 //============================================================
+
+//-----------------------------Users-------------------
+function GetUsers(substr) {
+    GetDataTable(
+        {
+            fields: [{
+                "id": "Код",
+                "FIO": "ФИО сотрудника",
+                "Name": "Роль",
+                "orgName": "Отделение",
+            }],
+            actions: [{
+                "Details": "'User'",
+                "Delete": "'User'",
+                "Update": "'User'"
+            }
+
+            ]
+        }, '/api/user/?substr=' + substr, 15, 'usertree')
+}
+//=======================================================================
+
+//-----------------------------Orgs-------------------
+function GetOrgs(substr) {
+    GetDataTable(
+        {
+            fields: [{
+                //"id": "Код",
+                "orgName": "Наименование",
+                "orgAdress": "Адрес",
+                "orgINN": "ИНН",
+                "orgOGRN": "ОГРН",
+                "orgRuk": "Руководитель",
+            }],
+            actions: [{
+                "Details": "'Org'",
+                "Delete": "'Org'",
+                "Update": "'Org'"
+            }
+
+            ]
+        }, '/api/orgs/?substr=' + substr, 15, 'orgtree')
+};
+
+function GetOrgsForRegister(dest) {
+    $.get('/api/orgs/?substr=', function (data) {
+        $(dest).empty().append('<option></option>')
+        $.each(data, function (key, item) {
+            $(dest).append('<option value="' + item.id + '">' + item.orgName + '</option>');
+        });
+    });
+};
+//=======================================================================
+
+//-----------------------------Contracts-------------------
+function GetContracts(substr) {
+    GetDataTable(
+        {
+            fields: [{
+                "id": "Код",
+                "orgName": "Отделение",
+                "FIO": "Контрагент",
+                "order_num": "Номер",
+                "order_date": "Дата",
+                "order_summ": "Сумма",
+                "estimated_close": "Срок",
+            }],
+            actions: [{
+                "Details": "'Org'",
+                "Delete": "'Org'",
+                "Update": "'Org'"
+            }
+
+            ]
+        }, '/api/contracts/?substr=' + substr, 15, 'contracttree')
+};
+
+function GetOrgsForRegister(dest) {
+    $.get('/api/orgs/?substr=', function (data) {
+        $(dest).empty().append('<option></option>')
+        $.each(data, function (key, item) {
+            $(dest).append('<option value="' + item.id + '">' + item.orgName + '</option>');
+        });
+    });
+};
+//=======================================================================

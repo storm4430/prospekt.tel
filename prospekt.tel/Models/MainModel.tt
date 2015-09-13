@@ -436,7 +436,7 @@ public class CodeStringGenerator
 
 public class TypeMapper
 {
-    private const string ExternalTypeNameAttributeName = @"http://schemas.microsoft.com/ado/2006/04/codegeneration:ExternalTypeName";
+    private const string ExternalTypeNameAttributeName = @"https://schemas.microsoft.com/ado/2006/04/codegeneration:ExternalTypeName";
 
     private readonly System.Collections.IList _errors;
     private readonly CodeGenerationTools _code;

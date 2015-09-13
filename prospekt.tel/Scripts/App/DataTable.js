@@ -95,7 +95,25 @@ function GetAssignments(dataPath) { //'/api/assignments/2036531'
 };
 
 function NewObject(dataURL, obj, objEntity, opt) {
-    console.log(obj)
+    $.ajax(dataURL,
+        {
+            method: "POST",
+            data: obj,
+            //processData: false,
+            //contentType: "application/json",
+            success: function () {
+                switch (objEntity) {
+                    case (1): GetCategories(''); break;
+                    case (2): GetSubCategories(opt, ''); break;
+                    case (3): Getproducts(opt, ''); break;
+                    case (4): break;
+                    case (5): GetOrgs(''); break;
+                }
+            }
+        });
+};
+
+function NewInvocObject(dataURL, obj, objEntity, opt) {
     $.ajax(dataURL,
         {
             method: "POST",
