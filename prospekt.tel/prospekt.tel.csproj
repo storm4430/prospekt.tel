@@ -192,6 +192,7 @@
     <Compile Include="Controllers\Api\SexController.cs" />
     <Compile Include="Controllers\Api\SubCategoriesController.cs" />
     <Compile Include="Controllers\Api\CategoriesController.cs" />
+    <Compile Include="Controllers\Api\UserRolesController.cs" />
     <Compile Include="Controllers\Api\UsersController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\ContractController.cs" />
@@ -238,7 +239,13 @@
     <Compile Include="Models\usp_GetAllProducts_Result.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\usp_GetAllProducts_sel_Result.cs">
+      <DependentUpon>MainModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\usp_GetAllSubCategoriesByCategoryID_Result.cs">
+      <DependentUpon>MainModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\usp_GetAllUserRoles_Result.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\usp_GetAllUsers_Result.cs">

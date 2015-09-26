@@ -213,3 +213,13 @@ TypeAhead = {
         });
     }
 }
+
+function ShowCurrentDate() {
+    var dNow = new Date();
+    var utcdate = {
+        year: dNow.getFullYear(),
+        month: (dNow.getMonth() + 1).toString().length > 1 ? (dNow.getMonth() + 1) : '0' + (dNow.getMonth() + 1),
+        day: dNow.getDate().toString().length > 1 ? dNow.getDate() : '0' + dNow.getDate()
+    };
+    return utcdate.year + '-' + utcdate.month + '-' + utcdate.day;
+}

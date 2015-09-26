@@ -164,7 +164,7 @@ namespace prospekt.tel.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await UserManager.AddToRoleAsync(user.Id, "Пользователь");
+                    await UserManager.AddToRoleAsync(user.Id, model.UserRole);
                     //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     // Дополнительные сведения о том, как включить подтверждение учетной записи и сброс пароля, см. по адресу: https://go.microsoft.com/fwlink/?LinkID=320771

@@ -1,45 +1,120 @@
-﻿<div class="row" style="font-size:18px; text-align:center">
-    <button class="btn btn-primary btn-circle">1</button>
-    <button class="btn btn-default btn-circle">2</button>
-    <button class="btn btn-default btn-circle">3</button>
+﻿<style>
+    .gre {
+        max-width: none;
+    }
+</style>
+<div class="row" style="font-size:18px; text-align:center">
+    <button class="btn btn-primary btn-circle" id="frst">1</button>
+    <button class="btn btn-default btn-circle" id="scnd">2</button>
+    <button class="btn btn-default btn-circle" id="thrd">3</button>
 </div>
 <hr />
 <div class="row">
-    <div id="firstStage">
-        <div class="row" style="margin:0">
-            <div class="col-xs-3" style="padding-top:5px; text-align:right;">
-                <strong>Контрагент</strong>
+    <form>
+        <div class="col-md-12" id="newOrder">
+            <div class="form-group col-md-12">
+                <input class="form-control gre twitter-typeahead" id="personContract" type="text" placeholder="Контрагент" />
             </div>
-            <div class="col-xs-9">
-                <input class="input-sm" style="max-width:none; width:100%; margin:0" autofocus/>
+            <div class="form-group col-md-12">
+                <input class="form-control gre twitter-typeahead" id="productContract" type="text" placeholder="Товар" />
+            </div>
+            <div class="form-group has-feedback col-md-6">
+                <input type="date" class="form-control gre" id="order_date" title="Дата заключения договора" />
+                <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback col-md-6">
+                <input class="form-control gre" type="text" placeholder="Серийный номер" />
+                <span class="glyphicon glyphicon-barcode form-control-feedback"></span>
+            </div>
+            <hr />
+            <div class="pull-right">
+                <button class="btn btn-success btn-xs" id="firststep">Дальше  <i class="fa fa-forward fa-fw"></i> </button>
             </div>
         </div>
-       
-        <div class="row" style="margin:0">
-            <div class="col-xs-3" style="padding-top:5px; text-align:right;">
-                <strong>Товар</strong>
+        <div class="col-md-12" id="secondStage" hidden>
+            <div class="form-group has-feedback col-md-6">
+                <input class="form-control" id="summContract" type="number" step="1" placeholder="Сумма договора" />
+                <span class="glyphicon glyphicon-ruble form-control-feedback"></span>
             </div>
-            <div class="col-xs-9">
-                <input class="input-sm" style="max-width:none; width:100%; margin:0" />
+            <div class="form-group has-feedback col-md-6">
+                <input type="date" class="form-control" id="estimatedDateContract" title="Дата окончания договора" />
+                <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
             </div>
-        </div>
-        <hr />
-        <div class="row">
+            <button class="btn btn-sm btn-link" style="margin-left:25px"><i class="fa fa-print fa-fw"></i>Распечатать договор</button>
+            <hr />
             <div class="pull-left">
-                <button class="btn btn-default" style="margin-left:35px" disabled>Назад</button>
+                <button class="btn btn-success btn-xs" id="backtofirststep"><i class="fa fa-backward fa-fw"></i> Назад</button>
             </div>
             <div class="pull-right">
-                <button class="btn btn-default" style="margin-right:35px">Дальше</button>
+                <button class="btn btn-success btn-xs" id="secondstep">Дальше  <i class="fa fa-forward fa-fw"></i> </button>
             </div>
         </div>
-    </div>
-    <div id="secondStage">
+        <div id="thirdStage">
 
-    </div>
-    <div id="thirdStage">
-
-    </div>
+        </div>
+    </form>
 </div>
+<script>
+    $(document).ready(function () {
+        $('#order_date').val(ShowCurrentDate);
+
+        TypeAhead.init('#personContract', '/api/persons/?substr=%QUERY', 3, 20, 'PersonsPK',
+                    {
+                        handlebars: '<span class="fa fa-user fa-fw"></span>{{fam}} {{im}} {{ot}} {{birthday}} г.р.'
+                    }, [
+                          '<div class="empty-message">',
+                          '<div class="alert alert-danger" role="alert" style="margin:5px"><span class="fa fa-exclamation-circle fa-fw"></span>Поиск не вернул результатов</div>',
+                          '<button class="btn btn-link" onclick="PersonCreate()"><span class="fa fa-plus fa-fw"></span>Добавить контрагента</button>',
+                          '</div>'
+                    ].join('\n'),
+                    function (event, data) {
+                        var personsPK = data.id;
+                        $('#productContract').focus();
+                        //$.get('/person/details/' + personsPK, function (pdata) {
+                        //    $('#persCard').empty().html(pdata).fadeIn("fast");
+                        //});
+                    });
+
+        TypeAhead.init('#productContract', '/api/products/?substr=%QUERY', 1, 20, 'id',
+                            {
+                                handlebars: '<span class="fa fa-laptop fa-fw"></span>{{fullProductName}} '
+                            }, [
+                                  '<div class="empty-message">',
+                                  '<div class="alert alert-danger" role="alert" style="margin:5px"><span class="fa fa-exclamation-circle fa-fw"></span>Поиск не вернул результатов</div>',
+                                  '<button class="btn btn-link" onclick="PersonCreate()"><span class="fa fa-plus fa-fw"></span>Добавить контрагента</button>',
+                                  '</div>'
+                            ].join('\n'),
+                            function (event, data) {
+                                var productPK = data.id;
+
+                                //$.get('/person/details/' + personsPK, function (pdata) {
+                                //    $('#persCard').empty().html(pdata).fadeIn("fast");
+                                //});
+                            });
+
+        $('#newOrder input').keyup(function (e) {
+            if (e.keyCode == '27') {
+                $(this).val('');
+            };
+        });
+
+        $('#firststep').click(function (e) {
+            $('#newOrder').slideToggle(100);
+            $('#secondStage').slideToggle(100);
+            $('#frst').removeClass('btn-primary').addClass('btn-default');
+            $('#scnd').removeClass('btn-default').addClass('btn-primary');
+            e.preventDefault();
+        });
+        $('#backtofirststep').click(function (e) {
+            $('#secondStage').slideToggle(100);
+            $('#newOrder').slideToggle(100);
+            
+            $('#scnd').removeClass('btn-primary').addClass('btn-default');
+            $('#frst').removeClass('btn-default').addClass('btn-primary');
+            e.preventDefault();
+        })
+    });
+</script>
 
 
 

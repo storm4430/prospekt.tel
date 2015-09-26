@@ -85,6 +85,10 @@ namespace prospekt.tel.Models
         public string UserOt { get; set; }
 
         [Required]
+        [Display(Name = "Роль пользователя")]
+        public string UserRole { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Адрес электронной почты")]
         public string Email { get; set; }

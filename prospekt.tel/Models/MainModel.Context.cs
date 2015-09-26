@@ -389,5 +389,19 @@ namespace prospekt.tel.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetAllContracts_Result>("usp_GetAllContracts", orgIdParameter, substrParameter);
         }
+    
+        public virtual ObjectResult<usp_GetAllProducts_sel_Result> usp_GetAllProducts_sel(string substr)
+        {
+            var substrParameter = substr != null ?
+                new ObjectParameter("substr", substr) :
+                new ObjectParameter("substr", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetAllProducts_sel_Result>("usp_GetAllProducts_sel", substrParameter);
+        }
+    
+        public virtual ObjectResult<usp_GetAllUserRoles_Result> usp_GetAllUserRoles()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetAllUserRoles_Result>("usp_GetAllUserRoles");
+        }
     }
 }

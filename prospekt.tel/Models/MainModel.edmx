@@ -36,6 +36,9 @@
           <Parameter Name="scat" Type="int" Mode="In" />
           <Parameter Name="substr" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="usp_GetAllProducts_sel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="admin">
+          <Parameter Name="substr" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="usp_GetAllSubCategoriesByCategoryID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="admin">
           <Parameter Name="catId" Type="int" Mode="In" />
           <Parameter Name="substr" Type="varchar" Mode="In" />
@@ -118,6 +121,7 @@
           <Parameter Name="subcategory_desc" Type="varchar" Mode="In" />
           <Parameter Name="createdBy" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="usp_GetAllUserRoles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="usp_GetAllUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Substr" Type="nvarchar" Mode="In" />
         </Function>
@@ -246,6 +250,10 @@
             <Parameter Name="orgId" Mode="In" Type="Guid" />
             <Parameter Name="substr" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="usp_GetAllProducts_sel" ReturnType="Collection(popshopModel.usp_GetAllProducts_sel_Result)">
+          <Parameter Name="substr" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_GetAllUserRoles" ReturnType="Collection(popshopModel.usp_GetAllUserRoles_Result)" />
         </EntityContainer>
         <ComplexType Name="usp_GetAllCategories_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
@@ -371,6 +379,14 @@
           <Property Type="String" Name="order_comment" Nullable="true" MaxLength="1024" />
           <Property Type="Guid" Name="order_org" Nullable="false" />
           <Property Type="String" Name="order_num" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="usp_GetAllProducts_sel_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="fullProductName" Nullable="true" MaxLength="501" />
+        </ComplexType>
+        <ComplexType Name="usp_GetAllUserRoles_Result">
+          <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="256" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -571,6 +587,22 @@
                 <ScalarProperty Name="order_comment" ColumnName="order_comment" />
                 <ScalarProperty Name="order_org" ColumnName="order_org" />
                 <ScalarProperty Name="order_num" ColumnName="order_num" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_GetAllProducts_sel" FunctionName="Хранилище popshopModel.usp_GetAllProducts_sel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="popshopModel.usp_GetAllProducts_sel_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="fullProductName" ColumnName="fullProductName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_GetAllUserRoles" FunctionName="Хранилище popshopModel.usp_GetAllUserRoles">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="popshopModel.usp_GetAllUserRoles_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

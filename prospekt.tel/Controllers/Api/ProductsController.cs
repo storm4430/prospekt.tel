@@ -14,6 +14,19 @@ namespace prospekt.tel.Controllers.Api
     {
         private psEnt db = new psEnt();
 
+        public IHttpActionResult Get(string substr)
+        {
+            try
+            {
+                var result = db.usp_GetAllProducts_sel(substr).ToList();
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.InnerException.Message);
+            }
+        }
+
         public IHttpActionResult Get(int id, string substr)
         {
             try

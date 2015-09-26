@@ -370,4 +370,14 @@ function GetOrgsForRegister(dest) {
         });
     });
 };
+
+function GetUserRolesForRegister(dest) {
+    $.get('/api/userRoles/', function (data) {
+        $(dest).empty().append('<option></option>')
+        $.each(data, function (key, item) {
+            $(dest).append('<option value="' + item.Name + '">' + item.Name + '</option>');
+        });
+    });
+};
+
 //=======================================================================
