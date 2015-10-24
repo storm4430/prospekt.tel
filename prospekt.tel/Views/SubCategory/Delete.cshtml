@@ -1,0 +1,20 @@
+﻿<div>
+    <h4 id="notify"></h4>
+    <p>Вы уверены?</p>
+    <input id="catId" hidden/>
+    <button type="button" class="btn btn-default btn-circle" data-dismiss="modal"><span class="fa fa-undo"></span></button>
+    <button id="delCategory" type="button" class="btn btn-success btn-circle" data-dismiss="modal">
+        <span class="fa fa-check"></span>
+    </button>
+</div>
+<script>
+    $(document).ready(function () {
+        $.get('/api/subcategories/' + '@ViewBag.subCatId', function (data) {
+            $('#catId').val(data.catId);
+            $('#notify').html('Будет удалена следующая запись: <strong>' + data.subcategory_desc);
+        })
+        $('#delCategory').click(function () {
+            DeleteObject('/api/subcategories/' + '@ViewBag.subCatId', 2, $('#catId').val());
+        })
+    })
+</script>

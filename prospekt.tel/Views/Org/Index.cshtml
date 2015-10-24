@@ -1,0 +1,64 @@
+﻿@* Представление список Orgs *@
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <i class="fa fa-bar-chart-o fa-fw"></i> Отделения
+            <div class="pull-right">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                        Операции
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu pull-right" role="menu">
+                        <li>
+                            <a href="#" class="modalCont" data-ajaxpath="/org/insert/">Новое отделение</a>
+                        </li>
+                        <li>
+                            <a href="#">Показать архивные записи</a>
+                        </li>
+
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">Печать</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pull-right">
+                <span class="fa fa-search fa-fw"></span>
+                <input id="orgSearch" class="input-sm" type="text" placeholder="Поиск..." style="height:22px" autofocus />
+            </div>
+            <div class="pull-right">
+                <img id="preLoader" src="~/Content/img/preLoader.gif" hidden />
+            </div>
+        </div>
+        <!-- /.panel-heading -->
+        <div class="panel-body">
+            <div id="orgtree" style="overflow-y:scroll; height:350px"></div>
+
+        </div>
+        <div class="panel-footer" style="padding-bottom: 25px;">
+            <div id="orgfoot"></div>
+        </div>
+
+        <!-- /.panel-body -->
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        GetOrgs('');
+        $('.modalCont').off().click(function (e) {
+            var path = $(this).data('ajaxpath');
+            var title = $(this).text();
+            $.get(path, function (data) {
+                $('#mt').text(title);
+                $('#mb').empty().html(data);
+                $('#categoryMessages').modal({
+                    keyboard: false,
+                    backdrop: false
+                }, 'show');
+            });
+            e.preventDefault();
+        })
+    });
+</script>

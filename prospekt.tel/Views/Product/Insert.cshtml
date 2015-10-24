@@ -1,0 +1,72 @@
+﻿<table class="table table-condensed table-striped table-responsive">
+    <tbody>
+        <tr>
+            <td style="border-top:none; width:30%;text-align:right;">Категория</td>
+            <td style="border-top:none">
+                <select class="form-control" id="cat">
+                    <option></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td style="border-top:none;text-align:right;">Подкатегория</td>
+            <td style="border-top:none">
+                <select class="form-control" id="subcat">
+                    <option></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td style="border-top:none;text-align:right;">Наименование</td>
+            <td style="border-top:none">
+                <input class="form-control" id="product_name"/>
+            </td>
+        </tr>
+        <tr>
+            <td style="border-top:none;text-align:right;"></td>
+            <td style="border-top:none">
+                <button type="button" class="btn btn-default btn-circle" data-dismiss="modal"><span class="fa fa-undo"></span></button>
+                <button id="saveProduct" type="button" class="btn btn-success btn-circle" data-dismiss="modal">
+                    <span class="fa fa-check"></span>
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<script>
+    $(document).ready(function () {
+        if (__catId == '' && __subCatId == '') {
+            $.get('/api/categories/?substr=', function (data) {
+                $.each(data, function (key, item) {
+                    $('#cat').append('<option value="' + item.id + '">' + item.category_desc + '</option>')
+                })
+            });
+
+            $('#cat').change(function () {
+                $.get('/api/subcategories/?catid=' + $('#cat option:selected').val() + '&substr=', function (data) {
+                    $('#subcat').empty().append('<option></option>');
+                    $.each(data, function (key, item) {
+                        $('#subcat').append('<option value="' + item.id + '">' + item.subcategory_desc + '</option>')
+                    })
+                });
+
+            });
+        }
+        else {
+            $('#cat').empty().append('<option value="' + __catId + '">' + __catName + '</option>').attr('disabled', 'disabled');
+            $('#subcat').empty().append('<option value="' + __subCatId + '">' + __subCatName + '</option>').attr('disabled', 'disabled');
+        }
+       
+        $('#saveProduct').click(function () {
+            var newObj = {
+                catId: $('#cat option:selected').val(),
+                subcatId: $('#subcat option:selected').val(),
+                product_name: $('#product_name').val()
+            };
+            
+            NewObject('/api/products', newObj, 3, newObj.subcatId);
+        })
+    })
+</script>
+
