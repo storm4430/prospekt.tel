@@ -99,8 +99,6 @@ function NewObject(dataURL, obj, objEntity, opt) {
         {
             method: "POST",
             data: obj,
-            //processData: false,
-            //contentType: "application/json",
             success: function () {
                 switch (objEntity) {
                     case (1): GetCategories(''); break;
@@ -125,7 +123,7 @@ function NewInvocObject(dataURL, obj, objEntity, opt) {
                     case (1): GetCategories(''); break;
                     case (2): GetSubCategories(opt, ''); break;
                     case (3): Getproducts(opt, ''); break;
-                    case (4): break;
+                    case (4): $('#categoryMessages').modal('hide'); break;
                 }
             }
         });

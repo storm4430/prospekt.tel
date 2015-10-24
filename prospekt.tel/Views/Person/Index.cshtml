@@ -25,7 +25,14 @@
         //$.each(letters, function (key, item) {
         //    $('#lettersZone').append('<button class="btn btn-xs btn-default btn-circle">' + item + '</button>');
         //});
-
+        $('#ccc').keyup(function (e) {
+            
+            if (e.keyCode == 27)
+            {
+                console.log(e.keyCode)
+                $(this).val('');
+            }
+        })
         TypeAhead.init('#ccc', '/api/persons/?substr=%QUERY', 3, 20, 'PersonsPK',
             {
                 handlebars: '<span class="fa fa-user fa-fw"></span>{{fam}} {{im}} {{ot}} {{birthday}} г.р.'

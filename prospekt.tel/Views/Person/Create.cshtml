@@ -29,7 +29,7 @@
     }
 </style>
 <div class="row ">
-    <form>
+    <form id="npForm">
         <div class="col-md-8">
             <div class="form-group has-feedback">
                 <input class="form-control" type="text" placeholder="Фамилия" autofocus id="fam" required pattern="[  -;&quot;А-Яа-яЁё]{1,}" spellcheck="false" title="Фамилия должна быть на русском языке" />
@@ -152,6 +152,7 @@
                 formData.append('doc_num', $('#doc_num').val());
                 formData.append('cellPhone', $('#cellPhone').val());
                 formData.append('comment', $('#comment').val());
+                $('#npForm').find("input:not(:disabled), select:not(:disabled), textarea:not(:disabled)").prop("disabled", true);
                 NewInvocObject('/api/persons', formData, 4, '');
             }
             else {

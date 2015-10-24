@@ -1,7 +1,14 @@
-﻿var __catId = '';
+﻿// #region Global Variables
+
+var __catId = '';
 var __subCatId = '';
 var __catName = '';
 var __subCatName = '';
+
+// #endregion
+
+// #region Категории
+
 //-----------------------------Категории-------------------
 function GetCategories(substr) {
     GetDataTable(
@@ -55,6 +62,11 @@ function CategoryToSubdirectory(objId) {
 }
 
 //============================================================
+
+// #endregion
+
+// #region Подкатегории
+
 //-----------------------------Подкатегории-------------------
 function GetSubCategories(catid, substr) {
     GetDataTable(
@@ -103,6 +115,10 @@ function SubdirectoryToCategory() {
     $('#ajaxpage').show();
 }
 
+
+// #endregion
+
+// #region Номенклатура
 
 //-----------------------------Номенклатура-------------------
 function Getproducts(scatId, substr) {
@@ -162,6 +178,10 @@ function ProductToSubCategory() {
     $('#subCategory').show();
 }
 //============================================================
+
+// #endregion
+
+// #region Контрагент
 
 //-----------------------------Контрагент-------------------
 function GetPersons(scatId, substr) {
@@ -225,8 +245,8 @@ function GetSex(dest, callback) {
         $.each(data, function (key, item) {
             $(dest).append('<option value="' + item.id + '">' + item.description + '</option>');
         });
+        callback();
     });
-    callback();
 };
 
 function FillPersonCard(id, callback) {
@@ -282,9 +302,13 @@ function GetPersonPassScan(id) {
 
 function GetGullScan(obj) {
     var sId = $(obj).data('id');
-    window.open('/api/PersonFullScans/'+sId, 'blank')
+    window.open('/api/PersonFullScans/' + sId, 'blank')
 }
 //============================================================
+
+// #endregion
+
+// #region Users
 
 //-----------------------------Users-------------------
 function GetUsers(substr) {
@@ -306,6 +330,10 @@ function GetUsers(substr) {
         }, '/api/user/?substr=' + substr, 15, 'usertree')
 }
 //=======================================================================
+
+// #endregion
+
+// #region Orgs
 
 //-----------------------------Orgs-------------------
 function GetOrgs(substr) {
@@ -338,6 +366,10 @@ function GetOrgsForRegister(dest) {
     });
 };
 //=======================================================================
+
+// #endregion
+
+// #region Contracts
 
 //-----------------------------Contracts-------------------
 function GetContracts(substr) {
@@ -381,3 +413,5 @@ function GetUserRolesForRegister(dest) {
 };
 
 //=======================================================================
+
+// #endregion

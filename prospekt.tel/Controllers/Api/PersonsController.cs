@@ -35,7 +35,7 @@ namespace prospekt.tel.Controllers.Api
             try
             {
                 var result = db.usp_GetPersonById(id).FirstOrDefault();
-                
+
                 return Ok(result);
             }
             catch (Exception ex)
@@ -63,41 +63,51 @@ namespace prospekt.tel.Controllers.Api
         [HttpPost]
         public IHttpActionResult Create()
         {
-            var filePartPath = System.Configuration.ConfigurationManager.AppSettings ["ScansPath"].ToString();
+            var filePartPath = System.Configuration.ConfigurationManager.AppSettings["ScansPath"].ToString();
             var httpRequest = HttpContext.Current.Request;
-            var uniqueKey = httpRequest.Form ["fam"].ToString().Substring(0,1) +
-                            httpRequest.Form ["im"].ToString().Substring(0, 1) +
-                            httpRequest.Form ["ot"].ToString().Substring(0, 1) +
-                            httpRequest.Form ["doc_num"].ToString() +@"\";
-            var postedFile = httpRequest.Files ["photo"];
-            if (!Directory.Exists(filePartPath + @"photos\" + uniqueKey))
+            var uniqueKey = httpRequest.Form["fam"].ToString().Substring(0, 1) +
+                            httpRequest.Form["im"].ToString().Substring(0, 1) +
+                            httpRequest.Form["ot"].ToString().Substring(0, 1) +
+                            httpRequest.Form["doc_num"].ToString() + @"\";
+            var postedFile = httpRequest.Files["photo"];
+            var photoFilePath = "";
+            if (postedFile != null)
             {
-                Directory.CreateDirectory(filePartPath + @"photos\" + uniqueKey);
+                if (!Directory.Exists(filePartPath + @"photos\" + uniqueKey))
+                {
+                    Directory.CreateDirectory(filePartPath + @"photos\" + uniqueKey);
+                }
+                photoFilePath = filePartPath + @"photos\" + uniqueKey + postedFile.FileName;
+                postedFile.SaveAs(photoFilePath);
             }
-            var photoFilePath = filePartPath + @"photos\" + uniqueKey + postedFile. FileName;
-            postedFile.SaveAs(photoFilePath);
-            var postedScanFile = httpRequest.Files ["scan"];
-            if (!Directory.Exists(filePartPath + @"scans\" + uniqueKey))
+
+            var postedScanFile = httpRequest.Files["scan"];
+            var scanFilePath = "";
+            if (postedScanFile != null)
             {
-                Directory.CreateDirectory(filePartPath + @"scans\" + uniqueKey);
+                if (!Directory.Exists(filePartPath + @"scans\" + uniqueKey))
+                {
+                    Directory.CreateDirectory(filePartPath + @"scans\" + uniqueKey);
+                }
+                scanFilePath = filePartPath + @"scans\" + uniqueKey + postedScanFile.FileName;
+                postedScanFile.SaveAs(scanFilePath);
             }
-            var scanFilePath = filePartPath + @"scans\" + uniqueKey + postedScanFile.FileName;
-            postedScanFile.SaveAs(scanFilePath);
+
             usp_GetPerson_Result obj = new usp_GetPerson_Result()
             {
-                fam = httpRequest.Form ["fam"].ToString(),
-                im = httpRequest.Form ["im"].ToString(),
-                ot = httpRequest.Form ["ot"].ToString(),
-                sex = Convert.ToInt32(httpRequest.Form ["sex"].ToString()),
-                dr = DateTime.Parse(httpRequest.Form ["dr"].ToString()),
-                passport_serie = httpRequest.Form ["doc_ser"].ToString(),
-                passport_num = httpRequest.Form ["doc_num"].ToString(),
+                fam = httpRequest.Form["fam"].ToString(),
+                im = httpRequest.Form["im"].ToString(),
+                ot = httpRequest.Form["ot"].ToString(),
+                sex = Convert.ToInt32(httpRequest.Form["sex"].ToString()),
+                dr = DateTime.Parse(httpRequest.Form["dr"].ToString()),
+                passport_serie = httpRequest.Form["doc_ser"].ToString(),
+                passport_num = httpRequest.Form["doc_num"].ToString(),
                 pers_photo = photoFilePath,
                 pass_scan = scanFilePath,
-                cellPhone = httpRequest.Form ["cellPhone"].ToString(),
-                person_comment = httpRequest.Form ["comment"].ToString()
+                cellPhone = httpRequest.Form["cellPhone"].ToString(),
+                person_comment = httpRequest.Form["comment"].ToString()
             };
-            
+
             try
             {
                 var result = db.usp_Persons_IU(null, obj.fam, obj.im, obj.ot, obj.sex, obj.dr, obj.person_comment, obj.pers_photo, obj.pass_scan, obj.passport_serie, obj.passport_num, obj.cellPhone);
@@ -126,8 +136,8 @@ namespace prospekt.tel.Controllers.Api
 
         private string LatToRusKeyboard(string query)
         {
-            int code0 = (int) query [0];
-            char ch0 = query [0];
+            int code0 = (int)query[0];
+            char ch0 = query[0];
 
             string result = query;
 
@@ -222,7 +232,7 @@ namespace prospekt.tel.Controllers.Api
                     arr.TryGetValue(ch, out newCh);
 
                     if (newCh != '\0')
-                        result += arr [ch];
+                        result += arr[ch];
                     else
                         result += ch;
                 }
@@ -253,9 +263,9 @@ namespace prospekt.tel.Controllers.Api
 
             if (query.Length == 3)
             {
-                result.Fam = query [0].ToString();
-                result.Im = query [1].ToString();
-                result.Ot = query [2].ToString();
+                result.Fam = query[0].ToString();
+                result.Im = query[1].ToString();
+                result.Ot = query[2].ToString();
                 return result;
             }
 
@@ -268,9 +278,9 @@ namespace prospekt.tel.Controllers.Api
 
                 if (isInt)
                 {
-                    result.Fam = query [0].ToString();
-                    result.Im = query [1].ToString();
-                    result.Ot = query [2].ToString();
+                    result.Fam = query[0].ToString();
+                    result.Im = query[1].ToString();
+                    result.Ot = query[2].ToString();
                     result.Dr = new DateTime(Convert.ToInt32(manDateR.Substring(4, 4)), Convert.ToInt32(manDateR.Substring(2, 2)), Convert.ToInt32(manDateR.Substring(0, 2)));
                     return result;
                 }
@@ -278,15 +288,15 @@ namespace prospekt.tel.Controllers.Api
 
             if (query.IndexOf(' ') != -1)
             {
-                string [ ] arr = query.Split(' ');
+                string[] arr = query.Split(' ');
 
-                result.Fam = arr [0];
+                result.Fam = arr[0];
 
                 if (arr.Length > 1)
-                    result.Im = arr [1];
+                    result.Im = arr[1];
 
                 if (arr.Length > 2)
-                    result.Ot = arr [2];
+                    result.Ot = arr[2];
 
                 return result;
             }
