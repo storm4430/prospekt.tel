@@ -21,6 +21,6 @@
 input,
 select,
 textarea {
-    margin-left:15px;
+    /*margin-left:15px;*/
     max-width: 310px;
 }

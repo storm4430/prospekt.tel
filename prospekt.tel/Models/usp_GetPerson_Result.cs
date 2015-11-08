@@ -27,5 +27,6 @@ namespace prospekt.tel.Models
         public string cellPhone { get; set; }
         public string person_comment { get; set; }
         public System.DateTime dr { get; set; }
+        public string personAddres { get; set; }
     }
 }

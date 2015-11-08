@@ -12,19 +12,21 @@
 <div class="row">
     <form>
         <div class="col-md-12" id="newOrder">
-            <div class="form-group col-md-12">
+            <div class="form-group">
+                @*<span class="input-group-addon"><strong>Контрагент</strong></span>*@
                 <input class="form-control gre twitter-typeahead" id="personContract" type="text" placeholder="Контрагент" />
             </div>
-            <div class="form-group col-md-12">
+            <div class="form-group">
+                @*<span class="input-group-addon"><strong>Товар</strong></span>*@
                 <input class="form-control gre twitter-typeahead" id="productContract" type="text" placeholder="Товар" />
             </div>
-            <div class="form-group has-feedback col-md-6">
-                <input type="date" class="form-control gre" id="order_date" title="Дата заключения договора" />
-                <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
+            <div class="form-group input-group">
+                <span class="input-group-addon"><strong>Дата заключения договора</strong></span>
+                <input type="date" class="form-control gre" id="order_date" title="" />
             </div>
-            <div class="form-group has-feedback col-md-6">
+            <div class="form-group input-group">
+                <span class="input-group-addon"><strong>Серийный номер</strong></span>
                 <input class="form-control gre" type="text" placeholder="Серийный номер" />
-                <span class="glyphicon glyphicon-barcode form-control-feedback"></span>
             </div>
             <hr />
             <div class="pull-right">
@@ -32,21 +34,23 @@
             </div>
         </div>
         <div class="col-md-12" id="secondStage" hidden>
-            <div class="form-group has-feedback col-md-6">
-                <input class="form-control" id="summContract" type="number" step="1" placeholder="Сумма договора" />
-                <span class="glyphicon glyphicon-ruble form-control-feedback"></span>
+            <div class="form-group input-group">
+                <span class="input-group-addon"><strong>Сумма договора</strong></span>
+                <input class="form-control gre" id="summContract" type="number" step="1" placeholder="Сумма договора" />
+                @*<span class="glyphicon glyphicon-ruble form-control-feedback"></span>*@
             </div>
-            <div class="form-group has-feedback col-md-6">
-                <input type="date" class="form-control" id="estimatedDateContract" title="Дата окончания договора" />
-                <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
+            <div class="form-group input-group">
+                <span class="input-group-addon"><strong>Дата окончания договора</strong></span>
+                <input type="date" class="form-control gre" id="estimatedDateContract" title="Дата окончания договора" />
+                @*<span class="glyphicon glyphicon-calendar form-control-feedback"></span>*@
             </div>
-            <button class="btn btn-sm btn-link" style="margin-left:25px"><i class="fa fa-print fa-fw"></i>Распечатать договор</button>
+            <button class="btn btn-sm btn-link" @*style="margin-left:25px"*@><i class="fa fa-file-word-o fa-fw"></i>Подготовить договор</button>
             <hr />
             <div class="pull-left">
                 <button class="btn btn-success btn-xs" id="backtofirststep"><i class="fa fa-backward fa-fw"></i> Назад</button>
             </div>
             <div class="pull-right">
-                <button class="btn btn-success btn-xs" id="secondstep">Дальше  <i class="fa fa-forward fa-fw"></i> </button>
+                <button class="btn btn-success btn-xs" id="thirdstep">Дальше  <i class="fa fa-forward fa-fw"></i> </button>
             </div>
         </div>
         <div id="thirdStage">

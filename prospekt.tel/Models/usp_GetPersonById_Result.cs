@@ -29,5 +29,6 @@ namespace prospekt.tel.Models
         public string pass_scan { get; set; }
         public string created { get; set; }
         public string updated { get; set; }
+        public string personAddres { get; set; }
     }
 }

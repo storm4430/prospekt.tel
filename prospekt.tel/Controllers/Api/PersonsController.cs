@@ -110,7 +110,7 @@ namespace prospekt.tel.Controllers.Api
 
             try
             {
-                var result = db.usp_Persons_IU(null, obj.fam, obj.im, obj.ot, obj.sex, obj.dr, obj.person_comment, obj.pers_photo, obj.pass_scan, obj.passport_serie, obj.passport_num, obj.cellPhone);
+                var result = db.usp_Persons_IU(null, obj.fam, obj.im, obj.ot, obj.sex, obj.dr, obj.personAddres, obj.person_comment, obj.pers_photo, obj.pass_scan, obj.passport_serie, obj.passport_num, obj.cellPhone);
                 return Ok(result);
             }
             catch (Exception ex)
@@ -124,7 +124,7 @@ namespace prospekt.tel.Controllers.Api
         {
             try
             {
-                var result = db.usp_Persons_IU(obj.id, obj.fam, obj.im, obj.ot, obj.sex, obj.dr, obj.person_comment, obj.pers_photo, obj.pass_scan, obj.passport_serie, obj.passport_num, obj.cellPhone);
+                var result = db.usp_Persons_IU(obj.id, obj.fam, obj.im, obj.ot, obj.sex, obj.dr, obj.personAddres, obj.person_comment, obj.pers_photo, obj.pass_scan, obj.passport_serie, obj.passport_num, obj.cellPhone);
                 return Ok(result);
             }
             catch (Exception ex)

@@ -85,6 +85,7 @@
           <Parameter Name="ot" Type="varchar" Mode="In" />
           <Parameter Name="sex" Type="int" Mode="In" />
           <Parameter Name="birthday" Type="datetime" Mode="In" />
+          <Parameter Name="person_adres" Type="varchar" Mode="In" />
           <Parameter Name="person_comment" Type="varchar" Mode="In" />
           <Parameter Name="person_photo" Type="varchar(max)" Mode="In" />
           <Parameter Name="person_passport" Type="varchar(max)" Mode="In" />
@@ -205,6 +206,7 @@
             <Parameter Name="ot" Mode="In" Type="String" />
             <Parameter Name="sex" Mode="In" Type="Int32" />
             <Parameter Name="birthday" Mode="In" Type="DateTime" />
+            <Parameter Name="person_adres" Mode="In" Type="String" />
             <Parameter Name="person_comment" Mode="In" Type="String" />
             <Parameter Name="person_photo" Mode="In" Type="String" />
             <Parameter Name="person_passport" Mode="In" Type="String" />
@@ -318,8 +320,9 @@
           <Property Type="String" Name="passport_serie" Nullable="false" MaxLength="5" />
           <Property Type="String" Name="passport_num" Nullable="false" MaxLength="6" />
           <Property Type="String" Name="cellPhone" Nullable="true" MaxLength="30" />
-          <Property Type="String" Name="person_comment" Nullable="false" MaxLength="1024" />
+          <Property Type="String" Name="person_comment" Nullable="true" MaxLength="1024" />
           <Property Type="DateTime" Name="dr" Nullable="false" Precision="23" />
+          <Property Type="String" Name="personAddres" Nullable="true" MaxLength="512" />
         </ComplexType>
         <ComplexType Name="usp_GetSex_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
@@ -337,11 +340,12 @@
           <Property Type="String" Name="passport_serie" Nullable="false" MaxLength="5" />
           <Property Type="String" Name="passport_num" Nullable="false" MaxLength="6" />
           <Property Type="String" Name="cellPhone" Nullable="true" MaxLength="30" />
-          <Property Type="String" Name="person_comment" Nullable="false" MaxLength="1024" />
+          <Property Type="String" Name="person_comment" Nullable="true" MaxLength="1024" />
           <Property Type="String" Name="pers_photo" Nullable="false" MaxLength="512" />
           <Property Type="String" Name="pass_scan" Nullable="false" MaxLength="512" />
           <Property Type="String" Name="created" Nullable="true" MaxLength="20" />
           <Property Type="String" Name="updated" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="personAddres" Nullable="true" MaxLength="512" />
         </ComplexType>
         <ComplexType Name="usp_GetAllUsers_Result">
           <Property Type="String" Name="id" Nullable="false" MaxLength="128" />
@@ -502,6 +506,7 @@
                 <ScalarProperty Name="cellPhone" ColumnName="cellPhone" />
                 <ScalarProperty Name="person_comment" ColumnName="person_comment" />
                 <ScalarProperty Name="dr" ColumnName="dr" />
+                <ScalarProperty Name="personAddres" ColumnName="personAddres" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -533,6 +538,7 @@
                 <ScalarProperty Name="pass_scan" ColumnName="pass_scan" />
                 <ScalarProperty Name="created" ColumnName="created" />
                 <ScalarProperty Name="updated" ColumnName="updated" />
+                <ScalarProperty Name="personAddres" ColumnName="personAddres" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

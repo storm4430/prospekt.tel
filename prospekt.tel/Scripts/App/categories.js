@@ -260,6 +260,7 @@ function FillPersonCard(id, callback) {
         $('#persCard #doc_ser').val(data.passport_serie).attr('disabled', 'disabled');
         $('#persCard #doc_num').val(data.passport_num).attr('disabled', 'disabled');
         $('#persCard #cellPhone').val(data.cellPhone).attr('disabled', 'disabled');
+        $('#persCard #adres').val(data.personAddres).attr('disabled', 'disabled');
         $('#persCard #comment').val(data.person_comment).attr('disabled', 'disabled');
         $('#persCard #cont_info').empty().append('<strong>Уникальный код контрагента:</strong> ' + id)
                                  .append('.    <strong>Запись создана:</strong> ' + data.created)
@@ -277,6 +278,7 @@ function FillPersonCard(id, callback) {
             $('#persCard #doc_ser').removeAttr('disabled');
             $('#persCard #doc_num').removeAttr('disabled');
             $('#persCard #cellPhone').removeAttr('disabled');
+            $('#persCard #adres').removeAttr('disabled');
             $('#persCard #comment').removeAttr('disabled');
             $('#actionsButton').hide();
             $('#butForPhotoUpdate').show();

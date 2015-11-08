@@ -211,7 +211,7 @@ namespace prospekt.tel.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetPerson_Result>("usp_GetPerson", famParameter, imParameter, otParameter);
         }
     
-        public virtual int usp_Persons_IU(Nullable<int> id, string fam, string im, string ot, Nullable<int> sex, Nullable<System.DateTime> birthday, string person_comment, string person_photo, string person_passport, string passport_serie, string passport_num, string cellPhone)
+        public virtual int usp_Persons_IU(Nullable<int> id, string fam, string im, string ot, Nullable<int> sex, Nullable<System.DateTime> birthday, string person_adres, string person_comment, string person_photo, string person_passport, string passport_serie, string passport_num, string cellPhone)
         {
             var idParameter = id.HasValue ?
                 new ObjectParameter("id", id) :
@@ -237,6 +237,10 @@ namespace prospekt.tel.Models
                 new ObjectParameter("birthday", birthday) :
                 new ObjectParameter("birthday", typeof(System.DateTime));
     
+            var person_adresParameter = person_adres != null ?
+                new ObjectParameter("person_adres", person_adres) :
+                new ObjectParameter("person_adres", typeof(string));
+    
             var person_commentParameter = person_comment != null ?
                 new ObjectParameter("person_comment", person_comment) :
                 new ObjectParameter("person_comment", typeof(string));
@@ -261,7 +265,7 @@ namespace prospekt.tel.Models
                 new ObjectParameter("cellPhone", cellPhone) :
                 new ObjectParameter("cellPhone", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_Persons_IU", idParameter, famParameter, imParameter, otParameter, sexParameter, birthdayParameter, person_commentParameter, person_photoParameter, person_passportParameter, passport_serieParameter, passport_numParameter, cellPhoneParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_Persons_IU", idParameter, famParameter, imParameter, otParameter, sexParameter, birthdayParameter, person_adresParameter, person_commentParameter, person_photoParameter, person_passportParameter, passport_serieParameter, passport_numParameter, cellPhoneParameter);
         }
     
         public virtual ObjectResult<usp_GetSex_Result> usp_GetSex()

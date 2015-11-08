@@ -45,23 +45,27 @@
             </div>
             <div class="form-group has-feedback col-md-4" style="padding-left:1px; padding-right:1px">
                 <select class="form-control" id="sex"></select>
-                <span class="glyphicon glyphicon-heart-empty form-control-feedback"></span>
+                <span class="glyphicon glyphicon-heart-empty form-control-feedback" style="right:20px"></span>
             </div>
             <div class="form-group has-feedback col-md-8" style="padding-left:1px; padding-right:1px">
                 <input type="date" class="form-control" placeholder="Дата рождения" id="dr" required />
                 <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback col-md-5" style="padding-left:1px; padding-right:1px">
-                <input class="form-control" placeholder="Серия паспорта" id="doc_ser" required pattern="[  -;А-Яа-яЁё]{4,}" spellcheck="false" title="ФИО бухгалтера должно быть на русском языке и указываться полностью" />
+                <input class="form-control" placeholder="Серия паспорта" id="doc_ser" required />
                 <span class="glyphicon glyphicon-list form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback col-md-7" style="padding-left:1px; padding-right:1px">
-                <input class="form-control" placeholder="Номер паспорта" id="doc_num" required pattern="[  -;А-Яа-яЁё]{4,}" spellcheck="false" title="ФИО бухгалтера должно быть на русском языке и указываться полностью" />
+                <input class="form-control" placeholder="Номер паспорта" id="doc_num" required />
                 <span class="glyphicon glyphicon-th-list form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback col-md-12" style="padding-left:1px; padding-right:1px">
-                <input class="form-control" type="text" placeholder="Телефон" autofocus id="cellPhone" required pattern="[  -;&quot;А-Яа-яЁё]{1,}" spellcheck="false" title="Отчество должна быть на русском языке" />
+                <input class="form-control" type="text" placeholder="Телефон" autofocus id="cellPhone" required  />
                 <span class="glyphicon glyphicon-phone-alt form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback col-md-12" style="padding-left:1px; padding-right:1px">
+                <input class="form-control" type="text" placeholder="Адрес" autofocus id="adres" required />
+                <span class="glyphicon glyphicon-home form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback col-md-12" style="padding-left:1px; padding-right:1px">
                 <textarea class="form-control" placeholder="Комментарий" id="comment" required spellcheck="false" style="resize:none" />
@@ -142,21 +146,22 @@
                 var formData = new FormData();
                 var opmlFile = $('#photo')[0];
                 formData.append('photo', opmlFile.files[0]);
-                formData.append('scan', $('#scan')[0].files[0]);
-                formData.append('fam', $('#fam').val());
-                formData.append('im', $('#im').val());
-                formData.append('ot', $('#ot').val());
-                formData.append('sex', $('#sex').val());
-                formData.append('dr', $('#dr').val());
-                formData.append('doc_ser', $('#doc_ser').val());
-                formData.append('doc_num', $('#doc_num').val());
-                formData.append('cellPhone', $('#cellPhone').val());
-                formData.append('comment', $('#comment').val());
+                formData.append('scan', $('#npForm #scan')[0].files[0]);
+                formData.append('fam', $('#npForm #fam').val());
+                formData.append('im', $('#npForm #im').val());
+                formData.append('ot', $('#npForm #ot').val());
+                formData.append('sex', $('#npForm #sex').val());
+                formData.append('dr', $('##npForm dr').val());
+                formData.append('doc_ser', $('#npForm #doc_ser').val());
+                formData.append('doc_num', $('#npForm #doc_num').val());
+                formData.append('cellPhone', $('#npForm #cellPhone').val());
+                formData.append('adres', $('##npForm adres').val());
+                formData.append('comment', $('#npForm #comment').val());
                 $('#npForm').find("input:not(:disabled), select:not(:disabled), textarea:not(:disabled)").prop("disabled", true);
                 NewInvocObject('/api/persons', formData, 4, '');
             }
             else {
-                $('#errMsg').empty().fadeIn('fast').text('Заполнены не все обязательные поля').fadeOut(3000);
+                $('#errMsg').empty().fadeIn('fast').text('Заполнены не все обязательные поля').fadeOut(6000);
             }
         });
     });

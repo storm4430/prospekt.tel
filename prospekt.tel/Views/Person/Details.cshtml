@@ -54,43 +54,57 @@
     </div>
     <div class="panel-body">
         <div class="col-xs-offset-1 col-xs-10">
-            <form>
+            <form id="pdForm">
                 <div class="col-md-8">
                     <input id="id" hidden />
-                    <div class="form-group has-feedback">
+                    <div class="form-group input-group">
+                        <span class="input-group-addon"><strong>Фамилия</strong></span>
                         <input class="form-control" type="text" placeholder="Фамилия" autofocus id="fam" required pattern="[  -;&quot;А-Яа-яЁё]{1,}" spellcheck="false" title="Фамилия должна быть на русском языке" />
                         <span class="glyphicon glyphicon-user form-control-feedback"></span>
                     </div>
-                    <div class="form-group has-feedback">
+                    <div class="form-group input-group">
+                        <span class="input-group-addon"><strong>Имя</strong></span>
                         <input class="form-control" type="text" placeholder="Имя" autofocus id="im" required pattern="[  -;&quot;А-Яа-яЁё]{1,}" spellcheck="false" title="Имя должно быть на русском языке" />
                         <span class="glyphicon glyphicon-user form-control-feedback"></span>
                     </div>
-                    <div class="form-group has-feedback">
+                    <div class="form-group input-group">
+                        <span class="input-group-addon"><strong>Отчество</strong></span>
                         <input class="form-control" type="text" placeholder="Отчество" autofocus id="ot" required pattern="[  -;&quot;А-Яа-яЁё]{1,}" spellcheck="false" title="Отчество должна быть на русском языке" />
                         <span class="glyphicon glyphicon-user form-control-feedback"></span>
                     </div>
-                    <div class="form-group has-feedback col-md-4" style="padding-left:1px; padding-right:1px">
-                        <select class="form-control" id="sexed"></select>
-                        <span class="glyphicon glyphicon-heart-empty form-control-feedback"></span>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon"><strong>Пол</strong></span>
+                        <select class="form-control" id="sexed" required style="max-width:none"></select>
+                        <span class="glyphicon glyphicon-heart-empty form-control-feedback" style="right:15px"></span>
                     </div>
-                    <div class="form-group has-feedback col-md-8" style="padding-left:1px; padding-right:1px">
+                    <div class="form-group input-group">
+                        <span class="input-group-addon"><strong>Дата рождения</strong></span>
                         <input type="date" class="form-control" placeholder="Дата рождения" id="dr" required />
-                        <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
+                        <span class="glyphicon glyphicon-calendar form-control-feedback" style="right:45px"></span>
                     </div>
-                    <div class="form-group has-feedback col-md-5" style="padding-left:1px; padding-right:1px">
-                        <input class="form-control" placeholder="Серия паспорта" id="doc_ser" required pattern="[  -;А-Яа-яЁё]{4,}" spellcheck="false" title="ФИО бухгалтера должно быть на русском языке и указываться полностью" />
+                    <div class="form-group input-group">
+                        <span class="input-group-addon"><strong>Паспорт: серия</strong></span>
+                        <input class="form-control" placeholder="Серия паспорта" id="doc_ser" required/>
                         <span class="glyphicon glyphicon-list form-control-feedback"></span>
                     </div>
-                    <div class="form-group has-feedback col-md-7" style="padding-left:1px; padding-right:1px">
-                        <input class="form-control" placeholder="Номер паспорта" id="doc_num" required pattern="[  -;А-Яа-яЁё]{4,}" spellcheck="false" title="ФИО бухгалтера должно быть на русском языке и указываться полностью" />
+                    <div class="form-group input-group">
+                        <span class="input-group-addon"><strong>Паспорт: номер</strong></span>
+                        <input class="form-control" placeholder="Номер паспорта" id="doc_num" required />
                         <span class="glyphicon glyphicon-th-list form-control-feedback"></span>
                     </div>
-                    <div class="form-group has-feedback col-md-12" style="padding-left:1px; padding-right:1px">
-                        <input class="form-control" type="text" placeholder="Телефон" autofocus id="cellPhone" required pattern="[  -;&quot;А-Яа-яЁё]{1,}" spellcheck="false" title="Отчество должна быть на русском языке" />
+                    <div class="form-group input-group">
+                        <span class="input-group-addon"><strong>Телефон</strong></span>
+                        <input class="form-control" type="text" placeholder="Телефон" id="cellPhone" required />
                         <span class="glyphicon glyphicon-phone-alt form-control-feedback"></span>
                     </div>
-                    <div class="form-group has-feedback col-md-12" style="padding-left:1px; padding-right:1px">
-                        <textarea class="form-control" placeholder="Комментарий" id="comment" required spellcheck="false" style="resize:none" />
+                    <div class="form-group input-group">
+                        <span class="input-group-addon"><strong>Адрес</strong></span>
+                        <input class="form-control" type="text" placeholder="Адрес" id="adres"  required/>
+                        <span class="glyphicon glyphicon-home form-control-feedback"></span>
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon"><strong>Комментарий</strong></span>
+                        <textarea class="form-control" placeholder="Комментарий" id="comment" spellcheck="false" style="resize:none" />
                         <span class="glyphicon glyphicon-comment form-control-feedback"></span>
                     </div>
                 </div>
@@ -102,7 +116,7 @@
                         <div class="input-group">
                             <span class="input-group-btn">
                                 <span class="btn btn-outline btn-primary btn-xs btn-file">
-                                    Изменить фото <input type="file" accept=".jpg" id="photo">
+                                    Изменить фото <input type="file" accept=".jpg" id="pdphoto">
                                 </span>
                             </span>
                         </div>
@@ -114,7 +128,7 @@
                         <div class="input-group" id="butForScanUpdate" hidden>
                             <span class="input-group-btn">
                                 <span class="btn btn-outline btn-primary btn-xs btn-file" id="scan2">
-                                    Изменить скан <input type="file" accept=".pdf" id="scan">
+                                    Изменить скан <input type="file" accept=".pdf" id="pdscan">
                                 </span>
                             </span>
                         </div>
@@ -124,6 +138,9 @@
                     </div>
                 </div>
             </form>
+            <div class="col-xs-8">
+                <h5 style="color:red" id="errMsg"></h5>
+            </div>
         </div>
     </div>
 </div>
@@ -139,11 +156,13 @@
             FillPersonCard(@ViewBag.PersPK, function () {
             });
 
-            $('#photo').change(function (event) {
+            $('#pdphoto').change(function (event) {
+                console.log('changingPhoto')
                 var tmppath = URL.createObjectURL(event.target.files[0]);
+                console.log(tmppath);
                 $("#srcfped").fadeIn("fast").attr('src', tmppath);
                 formData = new FormData();
-                formData.append('photo', $('#photo')[0].files[0]);
+                formData.append('photo', $('#pdphoto')[0].files[0]);
                 $.ajax('/api/personphotos/' + $('#id').val(),
                     {
                         method: "PUT",
@@ -152,9 +171,9 @@
                         contentType: false
                     });
             });
-            $('#scan').change(function (event) {
+            $('#persCard #pdscan').change(function (event) {
                 formData = new FormData();
-                formData.append('scan', $('#scan')[0].files[0]);
+                formData.append('scan', $('#pdscan')[0].files[0]);
                 $.ajax('/api/personfullscans/' + $('#id').val(),
                     {
                         method: "PUT",
@@ -171,7 +190,7 @@
 
 
         $('#saveCardButton').click(function () {
-            if ($("form")[0].checkValidity()) {
+            if ($("#pdForm")[0].checkValidity()) {
                 var formData = {
                     id: $('#persCard #id').val(),
                     fam: $('#persCard #fam').val(),
@@ -179,19 +198,19 @@
                     ot: $('#persCard #ot').val(),
                     sex: $('#persCard #sexed').val(),
                     dr: $('#persCard #dr').val(),
+                    personAddres: $('#persCard #adres').val(),
                     passport_serie: $('#persCard #doc_ser').val(),
                     passport_num: $('#persCard #doc_num').val(),
                     cellPhone: $('#persCard #cellPhone').val(),
                     person_comment: $('#persCard #comment').val()
                 };
-                console.log(formData);
                 UpdateObject('/api/persons', formData, 4, formData.id);
                 $('#actionsButton').show();
                 $('#_saveCardButton').hide();
             }
             else {
                 console.log('Заполнены не все обязательные поля');
-                $('#errMsg').empty().fadeIn('fast').text('Заполнены не все обязательные поля').fadeOut(3000);
+                $('#errMsg').empty().fadeIn('fast').text('Заполнены не все обязательные поля').fadeOut(6000);
             }
 
         });
