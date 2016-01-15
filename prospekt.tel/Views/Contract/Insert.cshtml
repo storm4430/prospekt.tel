@@ -74,9 +74,6 @@
                     function (event, data) {
                         var personsPK = data.id;
                         $('#productContract').focus();
-                        //$.get('/person/details/' + personsPK, function (pdata) {
-                        //    $('#persCard').empty().html(pdata).fadeIn("fast");
-                        //});
                     });
 
         TypeAhead.init('#productContract', '/api/products/?substr=%QUERY', 1, 20, 'id',
@@ -90,10 +87,6 @@
                             ].join('\n'),
                             function (event, data) {
                                 var productPK = data.id;
-
-                                //$.get('/person/details/' + personsPK, function (pdata) {
-                                //    $('#persCard').empty().html(pdata).fadeIn("fast");
-                                //});
                             });
 
         $('#newOrder input').keyup(function (e) {
@@ -112,7 +105,7 @@
         $('#backtofirststep').click(function (e) {
             $('#secondStage').slideToggle(100);
             $('#newOrder').slideToggle(100);
-            
+
             $('#scnd').removeClass('btn-primary').addClass('btn-default');
             $('#frst').removeClass('btn-default').addClass('btn-primary');
             e.preventDefault();
