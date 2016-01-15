@@ -423,11 +423,10 @@
     <Content Include="Views\Org\Index.cshtml" />
     <Content Include="Views\Org\Insert.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
-    <Content Include="Views\Contract\Index.cshtml" />
-    <Content Include="Views\Contract\Insert.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Contract\" />
     <Folder Include="Views\Test\" />
   </ItemGroup>
   <ItemGroup>
